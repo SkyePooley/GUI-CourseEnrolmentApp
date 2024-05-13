@@ -11,7 +11,7 @@ import java.time.DayOfWeek;
  * All timetables must have a lecture session, labs and tutorials are optional.
  * @author Skye Pooley
  */
-class Timetable {
+public class Timetable {
     private CalendarEvent lecture;
     private CalendarEvent lab;
     private CalendarEvent tutorial;
