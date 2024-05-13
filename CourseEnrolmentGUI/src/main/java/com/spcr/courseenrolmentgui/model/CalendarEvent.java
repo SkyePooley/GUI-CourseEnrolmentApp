@@ -8,9 +8,9 @@ import java.time.DayOfWeek;
  * Intended to be used for events which repeat each week for a full semester.
  */
 public class CalendarEvent {
-    private DayOfWeek eventDay;
-    private int eventHour;
-    private int eventDuration;
+    private final DayOfWeek eventDay;
+    private final int eventHour;
+    private final int eventDuration;
 
     /**
      * Get a new CalendarEvent. Checks that given hour is a valid time and the duration is less than 24 hours.
