@@ -9,18 +9,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Holds a connection to the embedded EnrolmentDatabase, allows queries and updates to be executed
+ * Follows singleton pattern, only allows one instance of itself. All instances returned by getDBManager are the same instance.
  * @author Skye Pooley
  */
 public class DBManager {
     private static final String USER_NAME = "spcr";
     private static final String PASSWORD  = "spcr";
     private static final String DB_URL    = "jdbc:derby:EnrolmentDatabase; create=true";
+    private static DBManager dbManagerInstance;
     
     private Connection connection;
     
-    public DBManager() {
+    private DBManager() {
         establishConnection();
+    }
+
+    public static synchronized DBManager getDBManager() {
+        if (dbManagerInstance != null)
+            return dbManagerInstance;
+        dbManagerInstance = new DBManager();
+        return dbManagerInstance;
     }
     
     private final void establishConnection() {

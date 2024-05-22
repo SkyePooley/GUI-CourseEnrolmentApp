@@ -15,11 +15,11 @@ public class DBModel extends Observable {
     private DBManager dbManager;
     
     public DBModel() {
-        this.dbManager = new DBManager();
+        this.dbManager = DBManager.getDBManager();
     }
     
     public static void main(String[] args) {
-        DBManager dbManager = new DBManager();
+        DBManager dbManager = DBManager.getDBManager();;
         Scanner scanner = new Scanner(System.in);
         String input = "";
         
@@ -29,5 +29,7 @@ public class DBModel extends Observable {
             if (input.equals("q")) { break; }
             dbManager.update(input);
         }
+
+        dbManager.closeConnections();
     }
 }
