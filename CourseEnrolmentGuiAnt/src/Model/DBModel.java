@@ -20,15 +20,9 @@ public class DBModel extends Observable {
     
     public static void main(String[] args) {
         DBManager dbManager = DBManager.getDBManager();;
-        Scanner scanner = new Scanner(System.in);
-        String input = "";
-        
-        while (true) {
-            System.out.println("SQL command or q to quit");
-            input = scanner.nextLine();
-            if (input.equals("q")) { break; }
-            dbManager.update(input);
-        }
+
+        CourseCollectionManager courses = new CourseCollectionManager(dbManager);
+        System.out.println(courses);
 
         dbManager.closeConnections();
     }

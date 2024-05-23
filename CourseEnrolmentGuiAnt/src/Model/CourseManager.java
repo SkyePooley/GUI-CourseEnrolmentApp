@@ -1,6 +1,9 @@
 package Model;
 
 
+import javax.xml.transform.Result;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -10,8 +13,21 @@ import java.util.ArrayList;
 public class CourseManager {
     private final Course course;
 
+    /**
+     * Construct a CourseManager from a pre-existing Course object
+     * @param course Course to be wrapped
+     */
     public CourseManager(Course course) {
         this.course = course;
+    }
+
+    /**
+     * Construct a CourseManager by creating a new Course from given ResultSet
+     * @param rs ResultSet containing one row from the Course DB table
+     * @throws SQLException If the given resultset does not map correctly then an SQLException will be thrown.
+     */
+    public CourseManager(ResultSet rs) throws SQLException {
+        this.course = Course.getCourse(rs);
     }
 
     /**
@@ -29,7 +45,11 @@ public class CourseManager {
 
     @Override
     public String toString() {
-        return this.getCode();
+        StringBuilder output = new StringBuilder();
+        output.append(this.getCode());
+        output.append(" - ");
+        output.append(this.getName());
+        return output.toString();
     }
 
     public String getCode() {

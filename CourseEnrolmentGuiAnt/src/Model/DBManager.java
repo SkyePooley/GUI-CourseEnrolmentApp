@@ -25,6 +25,10 @@ public class DBManager {
         establishConnection();
     }
 
+    /**
+     * Get a reference to the static instance of the database manager
+     * @return reference to DBManager instnace.
+     */
     public static synchronized DBManager getDBManager() {
         if (dbManagerInstance != null)
             return dbManagerInstance;
@@ -40,18 +44,30 @@ public class DBManager {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    /**
+     * Closes the currently held connection to the embedded database.
+     * Also nullifies the held instance of DBManager so that when getDBManager is next called-
+     * -a new connection is established.
+     */
     public void closeConnections() {
         if (connection != null) {
             try {
                 connection.close();
+                dbManagerInstance = null;
             } catch (SQLException ex) {
                 System.out.println("Closing the database connection failed with the following message:");
                 System.out.println(ex.getMessage());
             }
         }
     }
-    
+
+    /**
+     * Execute the given query on the EnrolmentDatabase
+     * SQL errors are caught and printed on the console.
+     * @param sqlStatement SQL statement following apache derby syntax
+     * @return Returns a resultset if the query was valid, null otherwise.
+     */
     protected ResultSet query(String sqlStatement) {
         try{
             Statement statement = this.connection.createStatement();
@@ -63,7 +79,12 @@ public class DBManager {
         }
         return null;
     }
-    
+
+    /**
+     * Execute the given update statement on the EnrolmentDatabase
+     * SQL errors are caught and printed on the console.
+     * @param sqlStatement SQL statement following apache derby syntax
+     */
     protected void update(String sqlStatement) {
         try {
             Statement statement = this.connection.createStatement();
