@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 
 public class CourseCollectionManager {
-    private final HashMap<String, CourseManager> courses;
+    private final HashMap<String, Course> courses;
 
     /**
      * Construct a CourseCollectionManager from pre-existing course collection
      * @param courses Mapping of course codes to courseManagers
      */
-    public CourseCollectionManager(HashMap<String, CourseManager> courses) {
+    public CourseCollectionManager(HashMap<String, Course> courses) {
         this.courses = courses;
     }
 
@@ -21,7 +21,7 @@ public class CourseCollectionManager {
      * @param dbManager Connection to EnrolmentDatabase
      */
     public CourseCollectionManager(DBManager dbManager) {
-        HashMap<String, CourseManager> courses = new HashMap<>(30);
+        HashMap<String, Course> courses = new HashMap<>(30);
         LinkedHashSet<String> courseCodes = new LinkedHashSet<>();
 
         // Get a set containing all the course codes in the COURSE db table
@@ -34,7 +34,7 @@ public class CourseCollectionManager {
             throw new RuntimeException(e);
         }
 
-        // Iterate through course codes and construct a CourseManager for each
+        // Iterate through course codes and construct a Course object for each
         for (String courseCode : courseCodes) {
             try {
                 // Row matching course code
@@ -44,16 +44,14 @@ public class CourseCollectionManager {
                 ResultSet timetableQuery = dbManager.query("SELECT * FROM TIMETABLE " +
                         "WHERE \"CourseCode\" = '" + courseCode + "'");
 
-                courses.put(courseCode, new CourseManager(courseQuery, timetableQuery));
+                courses.put(courseCode, new Course(courseQuery, timetableQuery));
 
             } catch (SQLException e) {
                 System.out.println("Reading in " + courseCode + " from DB failed");
                 e.printStackTrace();
             }
         }
-
-
-
+        
         this.courses = courses;
     }
 
@@ -61,11 +59,11 @@ public class CourseCollectionManager {
         return courses.containsKey(code);
     }
 
-    public boolean containsCourse(CourseManager course) {
+    public boolean containsCourse(Course course) {
         return courses.containsValue(course);
     }
 
-    public CourseManager getCourse(String code) {
+    public Course getCourse(String code) {
         return courses.get(code);
     }
 
@@ -76,7 +74,7 @@ public class CourseCollectionManager {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        for (CourseManager course : courses.values()) {
+        for (Course course : courses.values()) {
             output.append(course.toString());
             output.append("\n");
         }

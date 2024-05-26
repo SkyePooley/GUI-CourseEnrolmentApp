@@ -1,15 +1,15 @@
 package Model;
 
 public class Enrolment {
-    private final CourseManager course;
+    private final Course course;
     private final Timetable timetable;
 
-    public Enrolment(CourseManager course, Timetable timetable) {
+    public Enrolment(Course course, Timetable timetable) {
         this.course = course;
         this.timetable = timetable;
     }
 
-    public CourseManager getCourse() {
+    public Course getCourse() {
         return course;
     }
 

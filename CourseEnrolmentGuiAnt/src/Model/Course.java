@@ -5,40 +5,93 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 /**
- * Little pojo to store all the information on a course
- * Data to be filled in by the database manager
- * Not to be used raw, wrap in CourseManager first.
+ *
  * @author Skye Pooley
  */
 class Course {
-    String code;
-    String longName;
-    String description;
-    int level;
-    int points;
-    float efts;
-    LinkedList<Timetable> timetables;
+    private final String code;
+    private final String longName;
+    private final String description;
+    private final int level;
+    private final int points;
+    private final float efts;
+    private final LinkedList<Timetable> timetables;
 
-    private Course(String code) {
-        this.code = code;
-    }
+    public Course(ResultSet courseRS, ResultSet timetableRS) throws SQLException {
+        if (!courseRS.next()) { throw new SQLException(); }
 
-    public static Course getCourse(ResultSet courseRS, ResultSet timetableRS) throws SQLException {
-        if (!courseRS.next()) { return null; }
-
-        Course newCourse       = new Course(courseRS.getString("CODE"));
-        newCourse.longName     = courseRS.getString("COURSENAME");
-        newCourse.description  = courseRS.getString("DESCRIPTION");
-        newCourse.level        = courseRS.getInt("LEVEL");
-        newCourse.points       = courseRS.getInt("POINTS");
-        newCourse.efts         = (float) courseRS.getDouble("EFTS");
+        this.code         = courseRS.getString("CODE");
+        this.longName     = courseRS.getString("COURSENAME");
+        this.description  = courseRS.getString("DESCRIPTION");
+        this.level        = courseRS.getInt("LEVEL");
+        this.points       = courseRS.getInt("POINTS");
+        this.efts         = (float) courseRS.getDouble("EFTS");
 
         //TODO Add prerequisites
-        newCourse.timetables = new LinkedList<>();
+        this.timetables = new LinkedList<>();
         while (timetableRS.next()) {
-            newCourse.timetables.add(new Timetable(timetableRS));
+            this.timetables.add(new Timetable(timetableRS));
         }
+    }
 
-        return newCourse;
+    /**
+     * Compare given object with instance.
+     * @param o Any object, return will be more meaningful if given object is instance of Course.
+     * @return True if given object is a Course with the same code.
+     * @author Skye Pooley
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (!(o instanceof Course)) { return false; }
+        return this.getCode().equals( ((Course) o).getCode() );
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append(this.getCode());
+        output.append(" - ");
+        output.append(this.getName());
+        if (this.timetables.size() > 0) {
+            output.append("\nAvailable Timetables: ");
+            for (Timetable t : this.getTimetables()) {
+                output.append("\n");
+                output.append(t.toString());
+            }
+        }
+        return output.toString();
+    }
+
+    public String getCode() {
+        return this.code;
+    }
+
+    public String getName() {
+        return this.longName;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public int getLevel() {
+        return this.level;
+    }
+
+    public int getPoints() {
+        return this.points;
+    }
+
+    public float getEfts() {
+        return this.efts;
+    }
+
+    public LinkedList<Timetable> getTimetables() {
+        return this.timetables;
+    }
+
+    public Timetable getTimetable(int index) {
+        return this.timetables.get(index);
     }
 }
