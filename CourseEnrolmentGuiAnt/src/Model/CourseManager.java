@@ -1,10 +1,9 @@
 package Model;
 
 
-import javax.xml.transform.Result;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Manages read-only access to a Course object
@@ -23,11 +22,11 @@ public class CourseManager {
 
     /**
      * Construct a CourseManager by creating a new Course from given ResultSet
-     * @param rs ResultSet containing one row from the Course DB table
+     * @param courseRS ResultSet containing one row from the Course DB table
      * @throws SQLException If the given resultset does not map correctly then an SQLException will be thrown.
      */
-    public CourseManager(ResultSet rs) throws SQLException {
-        this.course = Course.getCourse(rs);
+    public CourseManager(ResultSet courseRS, ResultSet timetableRS) throws SQLException {
+        this.course = Course.getCourse(courseRS, timetableRS);
     }
 
     /**
@@ -49,6 +48,13 @@ public class CourseManager {
         output.append(this.getCode());
         output.append(" - ");
         output.append(this.getName());
+        if (course.timetables.size() > 0) {
+            output.append("\nAvailable Timetables: ");
+            for (Timetable t : this.getTimetables()) {
+                output.append("\n");
+                output.append(t.toString());
+            }
+        }
         return output.toString();
     }
 
@@ -76,7 +82,7 @@ public class CourseManager {
         return course.efts;
     }
 
-    public ArrayList<Timetable> getTimetables() {
+    public LinkedList<Timetable> getTimetables() {
         return course.timetables;
     }
 

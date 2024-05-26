@@ -25,6 +25,17 @@ public class DBManager {
         establishConnection();
     }
 
+    public static void main(String[] args) {
+        String courseCode = "COMP500";
+        DBManager db = new DBManager();
+        try {
+            ResultSet rs = db.query("SELECT * FROM TIMETABLE " +
+                    "WHERE \"CourseCode\" = '" + courseCode + "'");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Get a reference to the static instance of the database manager
      * @return reference to DBManager instnace.
@@ -68,16 +79,9 @@ public class DBManager {
      * @param sqlStatement SQL statement following apache derby syntax
      * @return Returns a resultset if the query was valid, null otherwise.
      */
-    protected ResultSet query(String sqlStatement) {
-        try{
-            Statement statement = this.connection.createStatement();
-            return statement.executeQuery(sqlStatement);
-        }
-        catch (SQLException e) {
-            System.out.println("Query failed: "  + sqlStatement);
-            System.out.println(e.getMessage());
-        }
-        return null;
+    protected ResultSet query(String sqlStatement) throws SQLException{
+        Statement statement = this.connection.createStatement();
+        return statement.executeQuery(sqlStatement);
     }
 
     /**

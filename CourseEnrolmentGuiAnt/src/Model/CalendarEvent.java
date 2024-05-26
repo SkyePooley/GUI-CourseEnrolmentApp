@@ -38,6 +38,14 @@ public class CalendarEvent {
         this.eventDuration = eventDuration;
     }
 
+    @Override
+    public String toString() {
+        String output = eventDay.toString() + " ";
+        output += eventHour + "00 - ";
+        output += eventHour+eventDuration + "00";
+        return output;
+    }
+
     public int getEventDuration() {
         return eventDuration;
     }

@@ -3,6 +3,7 @@ package Model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 
 public class CourseCollectionManager {
     private final HashMap<String, CourseManager> courses;
@@ -21,17 +22,37 @@ public class CourseCollectionManager {
      */
     public CourseCollectionManager(DBManager dbManager) {
         HashMap<String, CourseManager> courses = new HashMap<>(30);
+        LinkedHashSet<String> courseCodes = new LinkedHashSet<>();
 
-        try (ResultSet coursesDbSet = dbManager.query("SELECT * FROM COURSE")) {
-            while (coursesDbSet.next()) {
-                CourseManager course = new CourseManager(coursesDbSet);
-                courses.put(course.getCode(), course);
+        // Get a set containing all the course codes in the COURSE db table
+        try (ResultSet courseCodesQuery = dbManager.query("SELECT \"CODE\" FROM COURSE")) {
+            while (courseCodesQuery.next()) {
+                courseCodes.add(courseCodesQuery.getString("CODE"));
             }
-
         } catch (SQLException e) {
-            System.out.println("Reading in courses from DB failed");
+            System.out.println("Attempting to read course codes from COURSE failed:");
             throw new RuntimeException(e);
         }
+
+        // Iterate through course codes and construct a CourseManager for each
+        for (String courseCode : courseCodes) {
+            try {
+                // Row matching course code
+                ResultSet courseQuery = dbManager.query("SELECT * FROM COURSE " +
+                        "WHERE \"CODE\" = '" + courseCode + "'");
+                // Row(s) matching course code
+                ResultSet timetableQuery = dbManager.query("SELECT * FROM TIMETABLE " +
+                        "WHERE \"CourseCode\" = '" + courseCode + "'");
+
+                courses.put(courseCode, new CourseManager(courseQuery, timetableQuery));
+
+            } catch (SQLException e) {
+                System.out.println("Reading in " + courseCode + " from DB failed");
+                e.printStackTrace();
+            }
+        }
+
+
 
         this.courses = courses;
     }
