@@ -13,9 +13,11 @@ import java.util.Scanner;
  */
 public class DBModel extends Observable {
     private DBManager dbManager;
+    private CourseCollectionManager courses;
     
     public DBModel() {
         this.dbManager = DBManager.getDBManager();
+        courses = new CourseCollectionManager(dbManager);
     }
     
     public static void main(String[] args) {
@@ -25,5 +27,10 @@ public class DBModel extends Observable {
         System.out.println(courses);
 
         dbManager.closeConnections();
+    }
+
+    public void refresh() {
+        courses = new CourseCollectionManager(dbManager);
+        // refresh student
     }
 }

@@ -6,14 +6,15 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 
 public class CourseCollectionManager {
-    private final HashMap<String, Course> courses;
+    private final HashMap<String, Course> allCourses;
+    DBManager dbManager;
 
     /**
      * Construct a CourseCollectionManager from pre-existing course collection
      * @param courses Mapping of course codes to courseManagers
      */
     public CourseCollectionManager(HashMap<String, Course> courses) {
-        this.courses = courses;
+        this.allCourses = courses;
     }
 
     /**
@@ -21,18 +22,39 @@ public class CourseCollectionManager {
      * @param dbManager Connection to EnrolmentDatabase
      */
     public CourseCollectionManager(DBManager dbManager) {
-        HashMap<String, Course> courses = new HashMap<>(30);
+        this.dbManager = dbManager;
+        this.allCourses = getAllCourses();
+    }
+
+    /**
+     * Gets a list of course codes based on the given query condition.
+     * @param queryCondition The 'WHERE' clause of an SQL query in form "WHERE condition [AND condition]"
+     * @return Set containing course codes
+     */
+    private LinkedHashSet<String> getCourseCodesFromQuery(String queryCondition) {
         LinkedHashSet<String> courseCodes = new LinkedHashSet<>();
 
-        // Get a set containing all the course codes in the COURSE db table
-        try (ResultSet courseCodesQuery = dbManager.query("SELECT \"CODE\" FROM COURSE")) {
+        // Get a set containing all the course codes matching the condition
+        try (ResultSet courseCodesQuery = dbManager.query("SELECT \"CODE\" FROM COURSE " + queryCondition)) {
             while (courseCodesQuery.next()) {
                 courseCodes.add(courseCodesQuery.getString("CODE"));
             }
         } catch (SQLException e) {
-            System.out.println("Attempting to read course codes from COURSE failed:");
-            throw new RuntimeException(e);
+            System.out.println("Attempting to read course codes from COURSE with condition " + queryCondition + " failed:");
+            e.printStackTrace();
         }
+
+        return courseCodes;
+    }
+
+    /**
+     * Constructs a mapping of courses which match the given SQL condition
+     * @param queryCondition The 'WHERE' clause of an SQL query in form "WHERE condition [AND condition]"
+     * @return Mapping of course codes to course objects
+     */
+    private HashMap<String, Course> getCoursesFromQuery(String queryCondition) {
+        HashMap<String, Course> courses = new HashMap<>(30);
+        LinkedHashSet<String> courseCodes = getCourseCodesFromQuery(queryCondition);
 
         // Iterate through course codes and construct a Course object for each
         for (String courseCode : courseCodes) {
@@ -51,20 +73,25 @@ public class CourseCollectionManager {
                 e.printStackTrace();
             }
         }
-        
-        this.courses = courses;
+
+        return courses;
+    }
+
+    public HashMap<String, Course> getAllCourses() {
+        if (allCourses != null) { return allCourses; }
+        return getCoursesFromQuery("");
     }
 
     public boolean containsCourse(String code) {
-        return courses.containsKey(code);
+        return allCourses.containsKey(code);
     }
 
     public boolean containsCourse(Course course) {
-        return courses.containsValue(course);
+        return allCourses.containsValue(course);
     }
 
     public Course getCourse(String code) {
-        return courses.get(code);
+        return allCourses.get(code);
     }
 
     /**
@@ -74,7 +101,7 @@ public class CourseCollectionManager {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        for (Course course : courses.values()) {
+        for (Course course : allCourses.values()) {
             output.append(course.toString());
             output.append("\n");
         }
