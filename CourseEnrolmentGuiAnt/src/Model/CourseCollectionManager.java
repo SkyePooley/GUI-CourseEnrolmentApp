@@ -77,6 +77,12 @@ public class CourseCollectionManager {
         return courses;
     }
 
+    /**
+     * Get a mapping of all courses which exist on the database.
+     * If the courses have previously been read from the DB then this will return the existing mapping O(1)
+     * If this is the first time courses have been requested then they will need to be read in from DB O(n)
+     * @return Mapping of course codes to course objects.
+     */
     public HashMap<String, Course> getAllCourses() {
         if (allCourses != null) { return allCourses; }
         return getCoursesFromQuery("");

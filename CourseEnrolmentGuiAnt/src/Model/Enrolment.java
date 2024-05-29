@@ -1,15 +1,23 @@
 package Model;
 
 public class Enrolment {
-    private final Course course;
+    private final String course;
     private final Timetable timetable;
 
-    public Enrolment(Course course, Timetable timetable) {
+    public Enrolment(String course, Timetable timetable) {
         this.course = course;
         this.timetable = timetable;
     }
 
-    public Course getCourse() {
+    @Override
+    public String toString() {
+        String output = course + "\n";
+        output += timetable.toString();
+        output += "\n";
+        return output;
+    }
+
+    public String getCourse() {
         return course;
     }
 
