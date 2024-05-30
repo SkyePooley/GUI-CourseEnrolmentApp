@@ -2,7 +2,7 @@
  *
  * @author Clayton
  */
-package com.spcr.courseenrolmentgui;
+package GUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +22,7 @@ public class CourseScheduler extends JFrame{
         leftPanel.add(new AddRemovePanel());
         leftPanel.add(new SelectionPanel());
         leftPanel.add(new CourseDescriptionPanel());
-        leftPanel.add(new StreamSelectionPanel());
+//        leftPanel.add(new StreamSelectionPanel());
         leftPanel.add(createAddToScheduleButton());
 
         add(leftPanel, BorderLayout.WEST);
@@ -31,7 +31,7 @@ public class CourseScheduler extends JFrame{
         JScrollPane scrollPane = new JScrollPane(scheduleTable);
         add(scrollPane, BorderLayout.CENTER);
 
-        add(new BottomPanel(), BorderLayout.SOUTH);
+//        add(new BottomPanel(), BorderLayout.SOUTH);
 
         setVisible(true);
     }

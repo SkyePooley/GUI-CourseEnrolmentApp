@@ -1,7 +1,7 @@
 /**
  * @author Clayton
  */
-package com.spcr.courseenrolmentgui;
+package GUI;
 
 import javax.swing.*;
 import java.awt.*;
