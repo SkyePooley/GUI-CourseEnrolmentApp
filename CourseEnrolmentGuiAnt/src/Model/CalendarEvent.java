@@ -6,6 +6,7 @@ import java.time.DayOfWeek;
  * Event to be displayed on the GUI calendar.
  * Includes a day of the week, starting hour, and duration.
  * Intended to be used for events which repeat each week for a full semester.
+ * @author Skye Pooley
  */
 public class CalendarEvent {
     private final DayOfWeek eventDay;

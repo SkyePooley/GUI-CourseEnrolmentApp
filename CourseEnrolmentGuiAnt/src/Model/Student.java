@@ -4,6 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 
+/**
+ * Holds basic information on a student as well as all their enrolments.
+ * Provides methods to modify enrolments
+ * @author Skye Pooley
+ */
 class Student {
     private final String studentId;
     private final String firstName;

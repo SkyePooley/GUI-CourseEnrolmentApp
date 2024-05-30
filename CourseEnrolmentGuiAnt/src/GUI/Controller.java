@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author wmpoo
+ * @author Skye Pooley
  */
 public class Controller implements ActionListener {
     DBModel model;

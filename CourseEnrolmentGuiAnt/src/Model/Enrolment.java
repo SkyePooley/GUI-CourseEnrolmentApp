@@ -1,5 +1,9 @@
 package Model;
 
+/**
+ * Associates a course and timetable for displaying on the schedule and adding to the users records
+ * @author Skye Pooley
+ */
 public class Enrolment {
     private final String course;
     private final Timetable timetable;

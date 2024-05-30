@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Skye 
+ * @author Skye Pooley
  */
 public class DBModel extends Observable {
     private DBManager dbManager;
@@ -27,7 +27,7 @@ public class DBModel extends Observable {
         DBModel model = new DBModel();
         System.out.println(model.courses);
 
-        System.out.println(model.login("22179237"));
+        model.login("22179237");
         System.out.println(model.student);
 
         //dbManager.closeConnections();
@@ -38,14 +38,15 @@ public class DBModel extends Observable {
         // refresh student
     }
 
-    public boolean login(String studentId) {
+    public void login(String studentId) {
+        UpdateFlags update = new UpdateFlags();
         try {
             this.student = Student.getStudent(studentId, dbManager);
-            return student != null;
+            if (student != null) { update.loginSuccess = true; } else { update.loginFail = true; }
+            notifyObservers(update);
         } catch (SQLException e) {
             System.out.println("Something went wrong while attempting student login with ID " + studentId);
             e.printStackTrace();
         }
-        return false;
     }
 }

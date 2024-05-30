@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 /**
- *
+ * Holds basic info on a course as well as its available timetables and prerequisites.
+ * TODO Add prerequisites
  * @author Skye Pooley
  */
 class Course {

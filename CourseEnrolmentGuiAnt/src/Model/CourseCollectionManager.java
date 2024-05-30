@@ -5,6 +5,10 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 
+/**
+ * Holds a collection of all courses on the database, provides helper methods to sort through them all.
+ * @author Skye Pooley
+ */
 public class CourseCollectionManager {
     private final HashMap<String, Course> allCourses;
     DBManager dbManager;
