@@ -1,13 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/**
+ * @author Clayton
  */
 package GUI;
 
-/**
- *
- * @author Clayton
- */
-public class BottomPanel {
+import javax.swing.*;
+import java.awt.*;
+
+public class BottomPanel extends JPanel {
+    public JButton revertChangesButton;
+    public JButton confirmAndSaveButton;
     
+    public BottomPanel() {
+        setLayout(new FlowLayout(FlowLayout.RIGHT));
+        revertChangesButton = new JButton("Revert Changes");
+        confirmAndSaveButton = new JButton("Confirm and Save");
+        add(revertChangesButton);
+        add(confirmAndSaveButton);
+    }
 }

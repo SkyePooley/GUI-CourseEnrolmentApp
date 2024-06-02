@@ -1,13 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/**
+ * @author Clayton
  */
 package GUI;
 
-/**
- *
- * @author Clayton
- */
-public class StreamSelectionPanel {
+import javax.swing.*;
+import java.awt.*;
+
+public class StreamSelectionPanel extends JPanel {
+    public JComboBox<String> streamComboBox;
     
+    public StreamSelectionPanel() {
+        
+        setLayout(new FlowLayout(FlowLayout.LEFT));
+        JLabel streamLabel = new JLabel("Select Stream");
+        streamComboBox = new JComboBox<>(new String[]{"Stream 1", "Stream 2"});
+        add(streamLabel);
+        add(streamComboBox);
+    }
 }
