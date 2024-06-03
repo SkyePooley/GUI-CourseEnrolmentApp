@@ -6,6 +6,7 @@ package Model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Scanner;
 
@@ -17,6 +18,8 @@ public class DBModel extends Observable {
     private DBManager dbManager;
     private CourseCollectionManager courses;
     private Student student;
+    public LinkedList<String> eligibleCourseCodes;
+    private int selectedSemester = 1;
     
     public DBModel() {
         this.dbManager = DBManager.getDBManager();
@@ -48,5 +51,12 @@ public class DBModel extends Observable {
             System.out.println("Something went wrong while attempting student login with ID " + studentId);
             e.printStackTrace();
         }
+    }
+
+    public void updateEligibleCourses() {
+        this.eligibleCourseCodes = courses.getEligibleCourseCodes(student, selectedSemester);
+        UpdateFlags flags = new UpdateFlags();
+        flags.courseDropdownUpdate = true;
+        notifyObservers(flags);
     }
 }
