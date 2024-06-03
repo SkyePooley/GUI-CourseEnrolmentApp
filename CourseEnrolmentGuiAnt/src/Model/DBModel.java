@@ -20,10 +20,12 @@ public class DBModel extends Observable {
     private Student student;
     public LinkedList<String> eligibleCourseCodes;
     private int selectedSemester = 1;
+    private Course selectedCourse;
     
     public DBModel() {
         this.dbManager = DBManager.getDBManager();
         courses = new CourseCollectionManager(dbManager);
+        this.login("22179237");
     }
     
     public static void main(String[] args) {
@@ -46,6 +48,7 @@ public class DBModel extends Observable {
         try {
             this.student = Student.getStudent(studentId, dbManager);
             if (student != null) { update.loginSuccess = true; } else { update.loginFail = true; }
+            this.setChanged();
             notifyObservers(update);
         } catch (SQLException e) {
             System.out.println("Something went wrong while attempting student login with ID " + studentId);
@@ -53,10 +56,29 @@ public class DBModel extends Observable {
         }
     }
 
-    public void updateEligibleCourses() {
+    public void updateEligibleCourses(int semester) {
+        this.selectedSemester = semester;
         this.eligibleCourseCodes = courses.getEligibleCourseCodes(student, selectedSemester);
         UpdateFlags flags = new UpdateFlags();
         flags.courseDropdownUpdate = true;
+        this.setChanged();
         notifyObservers(flags);
+    }
+
+    public void updateSelectedCourse(String courseCode) {
+        this.selectedCourse = courses.getCourse(courseCode);
+        if (selectedCourse == null) {
+            System.out.println("There was an invalid course code selected. This really shouldn't happen, what did you do?");
+            return;
+        }
+
+        UpdateFlags flags = new UpdateFlags();
+        flags.courseSelected = true;
+        this.setChanged();
+        notifyObservers(flags);
+    }
+
+    public Course getSelectedCourse() {
+        return this.selectedCourse;
     }
 }

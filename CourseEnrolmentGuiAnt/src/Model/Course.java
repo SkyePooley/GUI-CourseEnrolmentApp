@@ -8,14 +8,15 @@ import java.util.LinkedList;
  * Holds basic info on a course as well as its available timetables and prerequisites.
  * @author Skye Pooley
  */
-class Course {
+public class Course {
     private final String code;
     private final String longName;
     private final String description;
     private final int level;
     private final int points;
     private final float efts;
-    private final LinkedList<Timetable> timetables;
+    private final LinkedList<Timetable> semOneTimetables;
+    private final LinkedList<Timetable> semTwoTimetables;
     private boolean hasSemOne;
     private boolean hasSemTwo;
     private final LinkedList<String> prerequisiteCodes;
@@ -34,14 +35,19 @@ class Course {
         hasSemTwo = false;
 
         // get timetables
-        this.timetables = new LinkedList<>();
+        this.semOneTimetables = new LinkedList<>();
+        this.semTwoTimetables = new LinkedList<>();
         while (timetableRS.next()) {
             Timetable newTimetable = new Timetable(timetableRS);
-            if (!hasSemOne())
-                if (newTimetable.getSemester() == 1) { hasSemOne = true; }
-            if (!hasSemTwo())
-                if (newTimetable.getSemester() == 2) { hasSemTwo = true; }
-            this.timetables.add(newTimetable);
+
+            if (newTimetable.getSemester() == 1) {
+                hasSemOne = true;
+                this.getSemOneTimetables().add(newTimetable);
+            }
+            if (newTimetable.getSemester() == 2) {
+                hasSemTwo = true;
+                this.getSemTwoTimetables().add(newTimetable);
+            }
         }
 
         // get prerequisites
@@ -67,18 +73,30 @@ class Course {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        output.append(this.getCode());
-        output.append(" - ");
         output.append(this.getName());
-        if (this.timetables.size() > 0) {
-            output.append("\nAvailable Timetables: ");
-            for (Timetable t : this.getTimetables()) {
+        output.append("\n\n");
+        output.append(this.description);
+
+        output.append("\n\n");
+
+        if (this.getSemOneTimetables().size() > 0) {
+            output.append("\nSemester One Timetables: ");
+            for (Timetable t : this.getSemOneTimetables()) {
                 output.append("\n");
                 output.append(t.toString());
             }
         }
+        if (this.getSemTwoTimetables().size() > 0) {
+            output.append("\n\nSemester Two Timetables: ");
+            for (Timetable t : this.getSemTwoTimetables()) {
+                output.append("\n");
+                output.append(t.toString());
+            }
+        }
+
+
         if (!this.getPrerequisiteCodes().isEmpty()) {
-            output.append("\nPrerequisites: ");
+            output.append("\n\nPrerequisites: ");
             for (String code : getPrerequisiteCodes()) {
                 output.append(code);
                 output.append(", ");
@@ -111,14 +129,6 @@ class Course {
         return this.efts;
     }
 
-    public LinkedList<Timetable> getTimetables() {
-        return this.timetables;
-    }
-
-    public Timetable getTimetable(int index) {
-        return this.timetables.get(index);
-    }
-
     public boolean hasSemOne() {
         return hasSemOne;
     }
@@ -129,5 +139,13 @@ class Course {
 
     public LinkedList<String> getPrerequisiteCodes() {
         return prerequisiteCodes;
+    }
+
+    public LinkedList<Timetable> getSemOneTimetables() {
+        return semOneTimetables;
+    }
+
+    public LinkedList<Timetable> getSemTwoTimetables() {
+        return semTwoTimetables;
     }
 }

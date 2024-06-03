@@ -3,6 +3,7 @@ package GUI;
 import Model.DBModel;
 import GUI.View;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,17 +21,25 @@ public class Controller implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        System.out.println("Action caught in controller");
-        Object sourse = event.getSource();
-        
-        if (sourse == view.getAddToScheduleButton())
-        {
-        }else if (sourse == view.getRevertChangesButton())
-        {
-        } else if (sourse == view.getConfirmAndSaveButton()) {
-            
+        System.out.print("Action caught in controller: ");
+        System.out.println(event.getActionCommand());
+
+        switch (event.getActionCommand()) {
+            case "Semester Selected":
+                model.updateEligibleCourses(Integer.parseInt(getComboOption(event.getSource())));
+                break;
+            case "Course Selected":
+                model.updateSelectedCourse(getComboOption(event.getSource()));
+                break;
+            default:
+                System.out.println("an unrecognised actionEvent was captured");
         }
-        // call something in the model
+    }
+
+    private String getComboOption(Object eventSource) {
+        if (!(eventSource instanceof JComboBox)) { return ""; }
+        JComboBox<String> source = (JComboBox) eventSource;
+        return (String) source.getSelectedItem();
     }
 
     public void addModel(DBModel model) {
@@ -40,9 +49,7 @@ public class Controller implements ActionListener {
 
     public void addView(View view) {
         this.view = view;
-        view.getAddToScheduleButton().addActionListener(this);
-        view.getRevertChangesButton().addActionListener(this);
-        view.getConfirmAndSaveButton().addActionListener(this);
+        view.addActionListener(this);
         System.out.println("View added to controller");
     }
 

@@ -104,6 +104,11 @@ public class CourseCollectionManager {
         return allCourses.containsValue(course);
     }
 
+    /**
+     * Get the course which has this code.
+     * @param code 7-digit course code
+     * @return Course object matching given code or null if there was no match.
+     */
     public Course getCourse(String code) {
         return allCourses.get(code);
     }
