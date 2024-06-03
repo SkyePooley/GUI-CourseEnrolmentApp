@@ -1,12 +1,12 @@
 ----------------------------------------------------------------
-Mon Jun 03 18:06:59 NZST 2024:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-018f-dcb5-478e-00000f800000 
-on database directory D:\git-repos\GUI-CourseEnrolmentApp\CourseEnrolmentGuiAnt\EnrolmentDatabase with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a 
-Loaded from file:/D:/git-repos/GUI-CourseEnrolmentApp/CourseEnrolmentGuiAnt/lib/derby.jar
+Mon Jun 03 04:51:25 UTC 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-018f-dc70-19a3-000007407ca0 
+on database directory C:\Users\wmpoo\OneDrive - AUT University\Classes\PDC\Project 2\CourseEnrolmentGuiAnt\EnrolmentDatabase with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a 
+Loaded from file:/C:/Users/wmpoo/OneDrive%20-%20AUT%20University/Classes/PDC/PDC_Tutorials/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=11.0.22+9-LTS-219
-user.dir=D:\git-repos\GUI-CourseEnrolmentApp\CourseEnrolmentGuiAnt
-os.name=Windows 10
+user.dir=C:\Users\wmpoo\OneDrive - AUT University\Classes\PDC\Project 2\CourseEnrolmentGuiAnt
+os.name=Windows 11
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
