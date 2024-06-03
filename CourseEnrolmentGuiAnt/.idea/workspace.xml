@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24a38822-ca8c-4f2f-879b-c2d0954acfa2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/db.lck" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/db.lck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/log.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/log.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/log1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/log1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/logmirror.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/logmirror.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/derby.log" beforeDir="false" afterPath="$PROJECT_DIR$/derby.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/CourseDescriptionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/CourseDescriptionPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/SelectionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/SelectionPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/StreamSelectionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/StreamSelectionPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/CourseCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/CourseCollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/DBModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/DBModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +136,7 @@
       <workItem from="1717042497930" duration="125000" />
       <workItem from="1717042697449" duration="4994000" />
       <workItem from="1717313827946" duration="33000" />
-      <workItem from="1717371504725" duration="19916000" />
+      <workItem from="1717371504725" duration="20555000" />
     </task>
     <servers />
   </component>

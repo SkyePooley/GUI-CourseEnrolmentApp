@@ -29,7 +29,6 @@ public class View extends JFrame implements Observer {
 
     // keep the GUI objects here
     private JTable scheduleTable;
-    private JButton addToScheduleButton;
     private JButton revertChangesButton;
     private JButton confirmAndSaveButton;
     
@@ -54,7 +53,6 @@ public class View extends JFrame implements Observer {
         leftPanel.add(selectionPanel);
         leftPanel.add(courseDescriptionPanel);
         leftPanel.add(streamSelectionPanel);
-        leftPanel.add(createAddToScheduleButton());
         
         add(leftPanel, BorderLayout.WEST);
         
@@ -65,12 +63,6 @@ public class View extends JFrame implements Observer {
         add(createBottomPanel(), BorderLayout.SOUTH);
         
         setVisible(true);
-    }
-    
-    private JPanel createAddToScheduleButton() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        addToScheduleButton = new JButton("Add to Schedule");
-        return panel;
     }
 
     /**
@@ -85,7 +77,6 @@ public class View extends JFrame implements Observer {
         streamSelectionPanel.addActionListener(listener);
 
         // add directly to buttons in this class
-        addToScheduleButton.addActionListener(listener);
         revertChangesButton.addActionListener(listener);
         confirmAndSaveButton.addActionListener(listener);
     }
