@@ -16,24 +16,70 @@ import java.util.Observer;
  *
  * @author Skye Pooley and Clayton Roberts
  */
-public class View implements Observer {
+public class View extends JFrame implements Observer {
     private final double defaultScreenPortionW = 0.5;
     private final double defaultScreenPortionH = 0.7;
 
     // keep the GUI objects here
-
+    private JComboBox<String> SemesterComboBox;
+    private JComboBox<String> courseComboBox;
+    private JComboBox<String> streamComboBox;
+    private JTextArea courseDescriptionArea;
+    private JTable scheduleTable;
+    private JButton addToScheduleButton;
+    private JButton revertChangesButton;
+    private JButton confirmAndSaveButton;
+    
     public View() {
+        
         System.out.println("View initialised");
+        
         // initialise GUI elements
-
-        JFrame frame = new JFrame("Course Enrolment Application");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Course Enrolment Application");
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
-        frame.setLocation(100, 100);
-        frame.setSize((int) (screenSize.getWidth() * defaultScreenPortionW),
-                (int) (screenSize.getHeight() * defaultScreenPortionH));
-        frame.setVisible(true);
+        setLocation(100, 100);
+        setSize((int) (screenSize.getWidth() * defaultScreenPortionW), (int) (screenSize.getHeight() * defaultScreenPortionH));
+        
+        //adding components
+        JPanel leftPanel = new JPanel();
+        
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        
+        AddRemovePanel addRemovePanel = new AddRemovePanel();
+        SelectionPanel selectionPanel = new SelectionPanel();
+        CourseDescriptionPanel courseDescriptionPanel = new CourseDescriptionPanel();
+        StreamSelectionPanel streamSelectionPanel = new StreamSelectionPanel();
+        leftPanel.add(addRemovePanel);
+        leftPanel.add(selectionPanel);
+        leftPanel.add(courseDescriptionPanel);
+        leftPanel.add(streamSelectionPanel);
+        leftPanel.add(createAddToScheduleButton());
+        
+        add(leftPanel, BorderLayout.WEST);
+        
+        scheduleTable = new JTable(15, 5); // 15 time slots, 5 days for columns
+        JScrollPane scrollPane = new JScrollPane(scheduleTable);
+        add(scrollPane, BorderLayout.CENTER);
+        
+        add(createBottomPanel(), BorderLayout.SOUTH);
+        
+        setVisible(true);
+    }
+    
+    private JPanel createAddToScheduleButton() {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        addToScheduleButton = new JButton("Add to Schedule");
+        return panel;
+    }
+    
+    private JPanel createBottomPanel() {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        revertChangesButton = new JButton("Revert Changes");
+        confirmAndSaveButton = new JButton("Confirm and save");
+        panel.add(getRevertChangesButton());
+        panel.add(getConfirmAndSaveButton());
+        return panel;
     }
 
     /**
@@ -86,4 +132,68 @@ public class View implements Observer {
         // After a course was selected from the dropdown menu the model has prepared into on it
         // Update the course info panel
     }
+
+    /**
+     * @return the SemesterComboBox
+     */
+    public JComboBox<String> getSemesterComboBox() {
+        return SemesterComboBox;
+    }
+
+    /**
+     * @return the courseComboBox
+     */
+    public JComboBox<String> getCourseComboBox() {
+        return courseComboBox;
+    }
+
+    /**
+     * @return the streamComboBox
+     */
+    public JComboBox<String> getStreamComboBox() {
+        return streamComboBox;
+    }
+
+    /**
+     * @return the courseDescriptionArea
+     */
+    public JTextArea getCourseDescriptionArea() {
+        return courseDescriptionArea;
+    }
+
+    /**
+     * @return the addToScheduleButton
+     */
+    public JButton getAddToScheduleButton() {
+        return addToScheduleButton;
+    }
+
+    /**
+     * @return the revertChangesButton
+     */
+    public JButton getRevertChangesButton() {
+        return revertChangesButton;
+    }
+
+    /**
+     * @return the confirmAndSaveButton
+     */
+    public JButton getConfirmAndSaveButton() {
+        return confirmAndSaveButton;
+    }
 }
+
+
+        /*
+        System.out.println("View initialised");
+        // initialise GUI elements
+
+        JFrame frame = new JFrame("Course Enrolment Application");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = kit.getScreenSize();
+        frame.setLocation(100, 100);
+        frame.setSize((int) (screenSize.getWidth() * defaultScreenPortionW),
+                (int) (screenSize.getHeight() * defaultScreenPortionH));
+        frame.setVisible(true);
+        */

@@ -1,6 +1,7 @@
 package GUI;
 
 import Model.DBModel;
+import GUI.View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,15 @@ public class Controller implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         System.out.println("Action caught in controller");
+        Object sourse = event.getSource();
+        
+        if (sourse == view.getAddToScheduleButton())
+        {
+        }else if (sourse == view.getRevertChangesButton())
+        {
+        } else if (sourse == view.getConfirmAndSaveButton()) {
+            
+        }
         // call something in the model
     }
 
@@ -30,6 +40,9 @@ public class Controller implements ActionListener {
 
     public void addView(View view) {
         this.view = view;
+        view.getAddToScheduleButton().addActionListener(this);
+        view.getRevertChangesButton().addActionListener(this);
+        view.getConfirmAndSaveButton().addActionListener(this);
         System.out.println("View added to controller");
     }
 
