@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 
 /**
  * Holds a collection of all courses on the database, provides helper methods to sort through them all.
@@ -11,15 +12,9 @@ import java.util.LinkedHashSet;
  */
 public class CourseCollectionManager {
     private final HashMap<String, Course> allCourses;
+    private final HashMap<String, Course> semOneCourses;
+    private final HashMap<String, Course> semTwoCourses;
     DBManager dbManager;
-
-    /**
-     * Construct a CourseCollectionManager from pre-existing course collection
-     * @param courses Mapping of course codes to courseManagers
-     */
-    public CourseCollectionManager(HashMap<String, Course> courses) {
-        this.allCourses = courses;
-    }
 
     /**
      * Construct a new CourseCollectionManager from a given database connection
@@ -28,6 +23,13 @@ public class CourseCollectionManager {
     public CourseCollectionManager(DBManager dbManager) {
         this.dbManager = dbManager;
         this.allCourses = getAllCourses();
+        semOneCourses = new HashMap<>(allCourses.size());
+        semTwoCourses = new HashMap<>(allCourses.size());
+
+        for (Course course : allCourses.values()) {
+            if (course.hasSemOne()) { semOneCourses.put(course.getCode(), course); }
+            if (course.hasSemTwo()) { semTwoCourses.put(course.getCode(), course); }
+        }
     }
 
     /**
@@ -69,8 +71,10 @@ public class CourseCollectionManager {
                 // Row(s) matching course code
                 ResultSet timetableQuery = dbManager.query("SELECT * FROM TIMETABLE " +
                         "WHERE \"CourseCode\" = '" + courseCode + "'");
+                ResultSet prerequisiteQuery = dbManager.query("SELECT * FROM PREREQUISITE " +
+                        "WHERE \"Dependant\" = '" + courseCode + "'");
 
-                courses.put(courseCode, new Course(courseQuery, timetableQuery));
+                courses.put(courseCode, new Course(courseQuery, timetableQuery, prerequisiteQuery));
 
             } catch (SQLException e) {
                 System.out.println("Reading in " + courseCode + " from DB failed");
@@ -105,6 +109,34 @@ public class CourseCollectionManager {
     }
 
     /**
+     * Get a list of course codes for which the given student has met all prerequisites.
+     * @param student To reference previous enrolments
+     * @param semester Filtered by semester
+     * @return LinkedList contaning 7-digit course codes. Returns null on illegal argument, empty list if no eligible courses
+     */
+    public LinkedList<String> getEligibleCourseCodes(Student student, int semester) {
+        if (semester < 1 || 2 < semester) { return null; }
+        LinkedList<String> eligibleCourseCodes = new LinkedList<>();
+
+        // iterate all courses in given semester
+        for (Course course : (semester==1 ? semOneCourses.values() : semTwoCourses.values()) ) {
+            boolean prerequisitesMet = true;
+            // check all prerequisites
+            for (String prerequisite : course.getPrerequisiteCodes()) {
+                if (!student.previousEnrolments.contains(prerequisite)) {
+                    prerequisitesMet = false;
+                    break;
+                }
+            }
+            if (prerequisitesMet) {
+                eligibleCourseCodes.add(course.getCode());
+            }
+        }
+
+        return eligibleCourseCodes;
+    }
+
+    /**
      * Get a string of all contained course codes and names, one course per line
      * @return Formatted string
      */
@@ -113,9 +145,17 @@ public class CourseCollectionManager {
         StringBuilder output = new StringBuilder();
         for (Course course : allCourses.values()) {
             output.append(course.toString());
-            output.append("\n");
+            output.append("\n\n   *------*\n\n");
         }
         return output.toString();
+    }
+
+    public HashMap<String, Course> getSemOneCourses() {
+        return semOneCourses;
+    }
+
+    public HashMap<String, Course> getSemTwoCourses() {
+        return semTwoCourses;
     }
 
     // TODO get eligible courses

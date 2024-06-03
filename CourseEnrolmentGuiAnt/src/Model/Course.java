@@ -6,7 +6,6 @@ import java.util.LinkedList;
 
 /**
  * Holds basic info on a course as well as its available timetables and prerequisites.
- * TODO Add prerequisites
  * @author Skye Pooley
  */
 class Course {
@@ -17,21 +16,38 @@ class Course {
     private final int points;
     private final float efts;
     private final LinkedList<Timetable> timetables;
+    private boolean hasSemOne;
+    private boolean hasSemTwo;
+    private final LinkedList<String> prerequisiteCodes;
 
-    public Course(ResultSet courseRS, ResultSet timetableRS) throws SQLException {
+    public Course(ResultSet courseRS, ResultSet timetableRS, ResultSet prerequisiteRS) throws SQLException {
         if (!courseRS.next()) { throw new SQLException(); }
 
+        // get basic info
         this.code         = courseRS.getString("CODE");
         this.longName     = courseRS.getString("COURSENAME");
         this.description  = courseRS.getString("DESCRIPTION");
         this.level        = courseRS.getInt("LEVEL");
         this.points       = courseRS.getInt("POINTS");
         this.efts         = (float) courseRS.getDouble("EFTS");
+        hasSemOne = false;
+        hasSemTwo = false;
 
-        //TODO Add prerequisites
+        // get timetables
         this.timetables = new LinkedList<>();
         while (timetableRS.next()) {
-            this.timetables.add(new Timetable(timetableRS));
+            Timetable newTimetable = new Timetable(timetableRS);
+            if (!hasSemOne())
+                if (newTimetable.getSemester() == 1) { hasSemOne = true; }
+            if (!hasSemTwo())
+                if (newTimetable.getSemester() == 2) { hasSemTwo = true; }
+            this.timetables.add(newTimetable);
+        }
+
+        // get prerequisites
+        this.prerequisiteCodes = new LinkedList<>();
+        while (prerequisiteRS.next()) {
+            getPrerequisiteCodes().add(prerequisiteRS.getString("Dependency"));
         }
     }
 
@@ -59,6 +75,13 @@ class Course {
             for (Timetable t : this.getTimetables()) {
                 output.append("\n");
                 output.append(t.toString());
+            }
+        }
+        if (!this.getPrerequisiteCodes().isEmpty()) {
+            output.append("\nPrerequisites: ");
+            for (String code : getPrerequisiteCodes()) {
+                output.append(code);
+                output.append(", ");
             }
         }
         return output.toString();
@@ -94,5 +117,17 @@ class Course {
 
     public Timetable getTimetable(int index) {
         return this.timetables.get(index);
+    }
+
+    public boolean hasSemOne() {
+        return hasSemOne;
+    }
+
+    public boolean hasSemTwo() {
+        return hasSemTwo;
+    }
+
+    public LinkedList<String> getPrerequisiteCodes() {
+        return prerequisiteCodes;
     }
 }
