@@ -66,26 +66,6 @@ public class Timetable {
     }
 
     /**
-     * Set the lab time of this timetable.
-     * Cannot overwrite an existing lab event, returns false if there was en existing lab event.
-     * @param labDay String matching weekday in java.time.DayOfWeek
-     * @param labHour int 0-23 representing the hour that the event starts in 24 hour time
-     * @param labDuration int 1-23 representing the number of hours event runs for
-     * @return true if the new event was successfully added
-     */
-    public boolean setLab(String labDay, int labHour, int labDuration) {
-        if (this.lab != null) { return false; }
-        this.lab = CalendarEvent.getCalendarEvent(DayOfWeek.valueOf(labDay), labHour, labDuration);
-        return this.getLab() != null;
-    }
-
-    public boolean setTutorial(String tutorialDay, int tutorialHour, int tutorialDuration) {
-        if (this.tutorial != null) { return false; }
-        this.tutorial = CalendarEvent.getCalendarEvent(DayOfWeek.valueOf(tutorialDay), tutorialHour, tutorialDuration);
-        return this.getTutorial() != null;
-    }
-
-    /**
      * Get string containing times of all weekly sessions in this timetable.
      * @return Formatted String
      */

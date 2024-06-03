@@ -17,6 +17,8 @@ class Course {
     private final int points;
     private final float efts;
     private final LinkedList<Timetable> timetables;
+    private boolean hasSemOne;
+    private boolean hasSemTwo;
 
     public Course(ResultSet courseRS, ResultSet timetableRS) throws SQLException {
         if (!courseRS.next()) { throw new SQLException(); }
@@ -27,11 +29,18 @@ class Course {
         this.level        = courseRS.getInt("LEVEL");
         this.points       = courseRS.getInt("POINTS");
         this.efts         = (float) courseRS.getDouble("EFTS");
+        hasSemOne = false;
+        hasSemTwo = false;
 
         //TODO Add prerequisites
         this.timetables = new LinkedList<>();
         while (timetableRS.next()) {
-            this.timetables.add(new Timetable(timetableRS));
+            Timetable newTimetable = new Timetable(timetableRS);
+            if (!hasSemOne())
+                if (newTimetable.getSemester() == 1) { hasSemOne = true; }
+            if (!hasSemTwo())
+                if (newTimetable.getSemester() == 2) { hasSemTwo = true; }
+            this.timetables.add(newTimetable);
         }
     }
 
@@ -94,5 +103,13 @@ class Course {
 
     public Timetable getTimetable(int index) {
         return this.timetables.get(index);
+    }
+
+    public boolean hasSemOne() {
+        return hasSemOne;
+    }
+
+    public boolean hasSemTwo() {
+        return hasSemTwo;
     }
 }

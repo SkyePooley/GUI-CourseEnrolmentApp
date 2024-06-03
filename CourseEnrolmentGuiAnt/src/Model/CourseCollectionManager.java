@@ -11,15 +11,9 @@ import java.util.LinkedHashSet;
  */
 public class CourseCollectionManager {
     private final HashMap<String, Course> allCourses;
+    private final HashMap<String, Course> semOneCourses;
+    private final HashMap<String, Course> semTwoCourses;
     DBManager dbManager;
-
-    /**
-     * Construct a CourseCollectionManager from pre-existing course collection
-     * @param courses Mapping of course codes to courseManagers
-     */
-    public CourseCollectionManager(HashMap<String, Course> courses) {
-        this.allCourses = courses;
-    }
 
     /**
      * Construct a new CourseCollectionManager from a given database connection
@@ -28,6 +22,13 @@ public class CourseCollectionManager {
     public CourseCollectionManager(DBManager dbManager) {
         this.dbManager = dbManager;
         this.allCourses = getAllCourses();
+        semOneCourses = new HashMap<>(allCourses.size());
+        semTwoCourses = new HashMap<>(allCourses.size());
+
+        for (Course course : allCourses.values()) {
+            if (course.hasSemOne()) { semOneCourses.put(course.getCode(), course); }
+            if (course.hasSemTwo()) { semTwoCourses.put(course.getCode(), course); }
+        }
     }
 
     /**
@@ -113,9 +114,17 @@ public class CourseCollectionManager {
         StringBuilder output = new StringBuilder();
         for (Course course : allCourses.values()) {
             output.append(course.toString());
-            output.append("\n");
+            output.append("\n\n   *------*\n\n");
         }
         return output.toString();
+    }
+
+    public HashMap<String, Course> getSemOneCourses() {
+        return semOneCourses;
+    }
+
+    public HashMap<String, Course> getSemTwoCourses() {
+        return semTwoCourses;
     }
 
     // TODO get eligible courses
