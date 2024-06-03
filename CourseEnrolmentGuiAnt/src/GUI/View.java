@@ -46,10 +46,14 @@ public class View extends JFrame implements Observer {
         
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         
-        leftPanel.add(new AddRemovePanel());
-        leftPanel.add(new SelectionPanel());
-        leftPanel.add(new CourseDescriptionPanel());
-        leftPanel.add(new StreamSelectionPanel());
+        AddRemovePanel addRemovePanel = new AddRemovePanel();
+        SelectionPanel selectionPanel = new SelectionPanel();
+        CourseDescriptionPanel courseDescriptionPanel = new CourseDescriptionPanel();
+        StreamSelectionPanel streamSelectionPanel = new StreamSelectionPanel();
+        leftPanel.add(addRemovePanel);
+        leftPanel.add(selectionPanel);
+        leftPanel.add(courseDescriptionPanel);
+        leftPanel.add(streamSelectionPanel);
         leftPanel.add(createAddToScheduleButton());
         
         add(leftPanel, BorderLayout.WEST);

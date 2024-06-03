@@ -20,5 +20,8 @@ public class CourseEnrolmentGUI {
         model.addObserver(mainWindow);
 
         Controller controller = new Controller();
+        controller.addModel(model);
+        controller.addView(mainWindow);
+        controller.initModel();
     }
 }
