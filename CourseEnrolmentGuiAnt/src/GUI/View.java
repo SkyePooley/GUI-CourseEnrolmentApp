@@ -2,6 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+/**
+ * @author Skye Pooley and Clayton Roberts
+ */
+
 package GUI;
 
 import Model.DBModel;
@@ -12,10 +16,6 @@ import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- *
- * @author Skye Pooley and Clayton Roberts
- */
 public class View extends JFrame implements Observer {
     private final double defaultScreenPortionW = 0.5;
     private final double defaultScreenPortionH = 0.7;
