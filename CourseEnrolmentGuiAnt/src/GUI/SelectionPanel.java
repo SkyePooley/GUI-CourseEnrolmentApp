@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
-public class SelectionPanel extends JPanel{
+public class SelectionPanel extends JPanel implements InteractivePanel {
     public JComboBox<String> semesterComboBox;
     public JComboBox<String> courseComboBox;
 
@@ -33,6 +33,7 @@ public class SelectionPanel extends JPanel{
         add(coursePanel);
     }
 
+    @Override
     public void addActionListener(ActionListener listener) {
         semesterComboBox.addActionListener(listener);
         courseComboBox.addActionListener(listener);

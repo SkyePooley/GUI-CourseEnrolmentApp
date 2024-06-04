@@ -26,6 +26,7 @@ public class View extends JFrame implements Observer {
     private SelectionPanel selectionPanel;
     private CourseDescriptionPanel courseDescriptionPanel;
     private StreamSelectionPanel streamSelectionPanel;
+    private BottomPanel saveRevertPanel;
 
     // keep the GUI objects here
     private JTable scheduleTable;
@@ -59,8 +60,9 @@ public class View extends JFrame implements Observer {
         scheduleTable = new JTable(15, 5); // 15 time slots, 5 days for columns
         JScrollPane scrollPane = new JScrollPane(scheduleTable);
         add(scrollPane, BorderLayout.CENTER);
-        
-        add(createBottomPanel(), BorderLayout.SOUTH);
+
+        saveRevertPanel = new BottomPanel();
+        add(saveRevertPanel, BorderLayout.SOUTH);
         
         setVisible(true);
     }
@@ -72,22 +74,10 @@ public class View extends JFrame implements Observer {
      * @author Skye Pooley
      */
     public void addActionListener(ActionListener listener) {
-        // add to buttons in panels
+        // add to interactives in panels
         selectionPanel.addActionListener(listener);
         streamSelectionPanel.addActionListener(listener);
-
-        // add directly to buttons in this class
-        revertChangesButton.addActionListener(listener);
-        confirmAndSaveButton.addActionListener(listener);
-    }
-
-    private JPanel createBottomPanel() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        revertChangesButton = new JButton("Revert Changes");
-        confirmAndSaveButton = new JButton("Confirm and save");
-        panel.add(revertChangesButton);
-        panel.add(confirmAndSaveButton);
-        return panel;
+        saveRevertPanel.addActionListener(listener);
     }
 
     /**
