@@ -84,6 +84,7 @@ public class Course {
             for (Timetable t : this.getSemOneTimetables()) {
                 output.append("\n");
                 output.append(t.toString());
+                output.append("\n");
             }
         }
         if (this.getSemTwoTimetables().size() > 0) {
@@ -91,6 +92,7 @@ public class Course {
             for (Timetable t : this.getSemTwoTimetables()) {
                 output.append("\n");
                 output.append(t.toString());
+                output.append("\n");
             }
         }
 

@@ -72,11 +72,30 @@ public class Timetable {
     @Override
     public String toString() {
         String output = "";
-        output +=  "Lecture: " + lecture.toString() + "\n";
-        output += hasTutorial() ? "Tutorial: " + tutorial.toString() : "No Tutorial";
-        output += "\n";
-        output += hasLab()      ? "Lab: " + lab.toString() : "No Lab";
+        output +=  "Lecture: " + lecture.toString();
+        output += hasTutorial() ? "\nTutorial: " + tutorial.toString() : "";
+        output += hasLab()      ? "\nLab: " + lab.toString() : "";
         return output;
+    }
+
+    /**
+     * Check whether this timetable clashes with given timetable.
+     * @param timetable Timetable object to compare against.
+     * @return True if there is overlap between the timetable events, false otherwise.
+     */
+    public boolean checkForClash(Timetable timetable) {
+        if (timetable == null) { return false; }
+        boolean lectureClash = checkEventClash(lecture, timetable);
+        boolean labClash = checkEventClash(lab, timetable);
+        boolean tutorialClash = checkEventClash(tutorial, timetable);
+
+        return lectureClash || labClash || tutorialClash;
+    }
+
+    private boolean checkEventClash(CalendarEvent event, Timetable timetable) {
+        return (event.checkForClash(timetable.getLecture())
+                || event.checkForClash(timetable.getTutorial())
+                || event.checkForClash(timetable.getLab()));
     }
 
     public boolean hasTutorial() {
