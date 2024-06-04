@@ -21,4 +21,6 @@ public class UpdateFlags {
     public boolean courseDropdownUpdate = false;
     // into for the selected course is available for the selection panel
     public boolean courseSelected = false;
+
+    public boolean streamClashUpdate = false;
 }

@@ -2,6 +2,7 @@ package Model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.HashSet;
 
 /**
@@ -90,6 +91,25 @@ class Student {
         }
 
         return output;
+    }
+
+    /**
+     * Check to see if a new timetable addition will clash with existing enrolments
+     * @param timetable New timetable to check
+     * @return True if there is a clash, false otherwise.
+     */
+    public boolean checkForClash(Timetable timetable) {
+        for (Enrolment enrolment : currentEnrolments) {
+            if (enrolment.getSemester() == timetable.getSemester())
+                if (enrolment.getTimetable().checkForClash(timetable))
+                    return true;
+        }
+        for (Enrolment enrolment : tempEnrolments) {
+            if (enrolment.getSemester() == timetable.getSemester())
+                if (enrolment.getTimetable().checkForClash(timetable))
+                    return true;
+        }
+        return false;
     }
 
     /**

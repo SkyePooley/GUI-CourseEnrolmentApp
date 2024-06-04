@@ -86,8 +86,12 @@ public class Timetable {
     public boolean checkForClash(Timetable timetable) {
         if (timetable == null) { return false; }
         boolean lectureClash = checkEventClash(lecture, timetable);
-        boolean labClash = checkEventClash(lab, timetable);
-        boolean tutorialClash = checkEventClash(tutorial, timetable);
+        boolean labClash = false;
+        if (hasLab())
+            labClash = checkEventClash(lab, timetable);
+        boolean tutorialClash = false;
+        if (hasTutorial())
+            tutorialClash = checkEventClash(tutorial, timetable);
 
         return lectureClash || labClash || tutorialClash;
     }

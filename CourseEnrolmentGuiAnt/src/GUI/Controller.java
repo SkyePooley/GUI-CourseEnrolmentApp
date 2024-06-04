@@ -31,6 +31,11 @@ public class Controller implements ActionListener {
             case "Course Selected":
                 model.updateSelectedCourse(getComboOption(event.getSource()));
                 break;
+            case "Stream selected":
+                String option = getComboOption(event.getSource());
+                if (option != null)
+                    model.updateSelectedStream(Integer.parseInt(option));
+                break;
             default:
                 System.out.println("an unrecognised actionEvent was captured");
         }
