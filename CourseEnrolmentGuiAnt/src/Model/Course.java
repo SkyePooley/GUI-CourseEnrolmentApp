@@ -6,32 +6,54 @@ import java.util.LinkedList;
 
 /**
  * Holds basic info on a course as well as its available timetables and prerequisites.
- * TODO Add prerequisites
  * @author Skye Pooley
  */
-class Course {
+public class Course {
     private final String code;
     private final String longName;
     private final String description;
     private final int level;
     private final int points;
     private final float efts;
-    private final LinkedList<Timetable> timetables;
+    private final LinkedList<Timetable> semOneTimetables;
+    private final LinkedList<Timetable> semTwoTimetables;
+    private boolean hasSemOne;
+    private boolean hasSemTwo;
+    private final LinkedList<String> prerequisiteCodes;
 
-    public Course(ResultSet courseRS, ResultSet timetableRS) throws SQLException {
+    public Course(ResultSet courseRS, ResultSet timetableRS, ResultSet prerequisiteRS) throws SQLException {
         if (!courseRS.next()) { throw new SQLException(); }
 
+        // get basic info
         this.code         = courseRS.getString("CODE");
         this.longName     = courseRS.getString("COURSENAME");
         this.description  = courseRS.getString("DESCRIPTION");
         this.level        = courseRS.getInt("LEVEL");
         this.points       = courseRS.getInt("POINTS");
         this.efts         = (float) courseRS.getDouble("EFTS");
+        hasSemOne = false;
+        hasSemTwo = false;
 
-        //TODO Add prerequisites
-        this.timetables = new LinkedList<>();
+        // get timetables
+        this.semOneTimetables = new LinkedList<>();
+        this.semTwoTimetables = new LinkedList<>();
         while (timetableRS.next()) {
-            this.timetables.add(new Timetable(timetableRS));
+            Timetable newTimetable = new Timetable(timetableRS);
+
+            if (newTimetable.getSemester() == 1) {
+                hasSemOne = true;
+                this.getSemOneTimetables().add(newTimetable);
+            }
+            if (newTimetable.getSemester() == 2) {
+                hasSemTwo = true;
+                this.getSemTwoTimetables().add(newTimetable);
+            }
+        }
+
+        // get prerequisites
+        this.prerequisiteCodes = new LinkedList<>();
+        while (prerequisiteRS.next()) {
+            getPrerequisiteCodes().add(prerequisiteRS.getString("Dependency"));
         }
     }
 
@@ -51,14 +73,35 @@ class Course {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        output.append(this.getCode());
-        output.append(" - ");
         output.append(this.getName());
-        if (this.timetables.size() > 0) {
-            output.append("\nAvailable Timetables: ");
-            for (Timetable t : this.getTimetables()) {
+        output.append("\n\n");
+        output.append(this.description);
+
+        output.append("\n\n");
+
+        if (this.getSemOneTimetables().size() > 0) {
+            output.append("\nSemester One Timetables: ");
+            for (Timetable t : this.getSemOneTimetables()) {
                 output.append("\n");
                 output.append(t.toString());
+                output.append("\n");
+            }
+        }
+        if (this.getSemTwoTimetables().size() > 0) {
+            output.append("\n\nSemester Two Timetables: ");
+            for (Timetable t : this.getSemTwoTimetables()) {
+                output.append("\n");
+                output.append(t.toString());
+                output.append("\n");
+            }
+        }
+
+
+        if (!this.getPrerequisiteCodes().isEmpty()) {
+            output.append("\n\nPrerequisites: ");
+            for (String code : getPrerequisiteCodes()) {
+                output.append(code);
+                output.append(", ");
             }
         }
         return output.toString();
@@ -88,11 +131,23 @@ class Course {
         return this.efts;
     }
 
-    public LinkedList<Timetable> getTimetables() {
-        return this.timetables;
+    public boolean hasSemOne() {
+        return hasSemOne;
     }
 
-    public Timetable getTimetable(int index) {
-        return this.timetables.get(index);
+    public boolean hasSemTwo() {
+        return hasSemTwo;
+    }
+
+    public LinkedList<String> getPrerequisiteCodes() {
+        return prerequisiteCodes;
+    }
+
+    public LinkedList<Timetable> getSemOneTimetables() {
+        return semOneTimetables;
+    }
+
+    public LinkedList<Timetable> getSemTwoTimetables() {
+        return semTwoTimetables;
     }
 }

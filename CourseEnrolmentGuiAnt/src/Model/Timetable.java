@@ -66,37 +66,36 @@ public class Timetable {
     }
 
     /**
-     * Set the lab time of this timetable.
-     * Cannot overwrite an existing lab event, returns false if there was en existing lab event.
-     * @param labDay String matching weekday in java.time.DayOfWeek
-     * @param labHour int 0-23 representing the hour that the event starts in 24 hour time
-     * @param labDuration int 1-23 representing the number of hours event runs for
-     * @return true if the new event was successfully added
-     */
-    public boolean setLab(String labDay, int labHour, int labDuration) {
-        if (this.lab != null) { return false; }
-        this.lab = CalendarEvent.getCalendarEvent(DayOfWeek.valueOf(labDay), labHour, labDuration);
-        return this.getLab() != null;
-    }
-
-    public boolean setTutorial(String tutorialDay, int tutorialHour, int tutorialDuration) {
-        if (this.tutorial != null) { return false; }
-        this.tutorial = CalendarEvent.getCalendarEvent(DayOfWeek.valueOf(tutorialDay), tutorialHour, tutorialDuration);
-        return this.getTutorial() != null;
-    }
-
-    /**
      * Get string containing times of all weekly sessions in this timetable.
      * @return Formatted String
      */
     @Override
     public String toString() {
         String output = "";
-        output +=  "Lecture: " + lecture.toString() + "\n";
-        output += hasTutorial() ? "Tutorial: " + tutorial.toString() : "No Tutorial";
-        output += "\n";
-        output += hasLab()      ? "Lab: " + lab.toString() : "No Lab";
+        output +=  "Lecture: " + lecture.toString();
+        output += hasTutorial() ? "\nTutorial: " + tutorial.toString() : "";
+        output += hasLab()      ? "\nLab: " + lab.toString() : "";
         return output;
+    }
+
+    /**
+     * Check whether this timetable clashes with given timetable.
+     * @param timetable Timetable object to compare against.
+     * @return True if there is overlap between the timetable events, false otherwise.
+     */
+    public boolean checkForClash(Timetable timetable) {
+        if (timetable == null) { return false; }
+        boolean lectureClash = checkEventClash(lecture, timetable);
+        boolean labClash = checkEventClash(lab, timetable);
+        boolean tutorialClash = checkEventClash(tutorial, timetable);
+
+        return lectureClash || labClash || tutorialClash;
+    }
+
+    private boolean checkEventClash(CalendarEvent event, Timetable timetable) {
+        return (event.checkForClash(timetable.getLecture())
+                || event.checkForClash(timetable.getTutorial())
+                || event.checkForClash(timetable.getLab()));
     }
 
     public boolean hasTutorial() {
