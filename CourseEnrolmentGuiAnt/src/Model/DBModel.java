@@ -4,12 +4,9 @@
  */
 package Model;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.LinkedList;
 import java.util.Observable;
-import java.util.Scanner;
 
 /**
  *
@@ -20,6 +17,7 @@ public class DBModel extends Observable {
     private CourseCollectionManager courses;
     private Student student;
 
+    // info for the view
     public LinkedList<String> eligibleCourseCodes;
     private int selectedSemester = 1;
     private Course selectedCourse;
@@ -97,6 +95,10 @@ public class DBModel extends Observable {
         return this.selectedCourse;
     }
 
+    /**
+     * Get the number of streams available for this course in this semester
+     * @return int number of streams
+     */
     public int getNumberOfStreams() {
         if (selectedSemester == 1) {
             return selectedCourse.getSemOneTimetables().size();
@@ -104,8 +106,13 @@ public class DBModel extends Observable {
         return selectedCourse.getSemTwoTimetables().size();
     }
 
+    /**
+     * Check whether the selected stream would cause a schedule clash
+     * @param streamIndex Optiom from the stream dropdown menu.
+     * @author Skye Pooley
+     */
     public void updateSelectedStream(int streamIndex) {
-        selectedStream = streamIndex-1;
+        selectedStream = streamIndex-1; // menu starts at one, data structure starts at zero
         LinkedList<Timetable> timetables = selectedSemester == 1 ? selectedCourse.getSemOneTimetables() : selectedCourse.getSemTwoTimetables();
         streamClash = student.checkForClash(timetables.get(selectedStream));
         System.out.println(selectedCourse.getCode() + " Stream " + streamIndex + " Clash " + streamClash);

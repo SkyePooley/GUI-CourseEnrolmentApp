@@ -36,8 +36,9 @@ public class StreamSelectionPanel extends JPanel implements InteractivePanel {
     }
 
     /**
-     * Update whether the selected stream clashes
-     * @param model
+     * Update whether the selected stream clashes with an existing enrolment
+     * @param model Model provides a flag which shows whether a clash was detected
+     * @author Skye Pooley
      */
     public void update(DBModel model) {
         if (model.streamClash) {
@@ -56,6 +57,7 @@ public class StreamSelectionPanel extends JPanel implements InteractivePanel {
     /**
      * Refresh stream options
      * @param model Reference to find out how many stream options there are
+     * @author Skye Pooley
      */
     public void refresh(DBModel model) {
         streamComboBox.removeAllItems();

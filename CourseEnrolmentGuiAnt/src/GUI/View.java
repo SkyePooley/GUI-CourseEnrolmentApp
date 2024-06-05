@@ -130,6 +130,7 @@ public class View extends JFrame implements Observer {
         // After a course was selected from the dropdown menu the model has prepared into on it
         // Update the course info panel
         courseDescriptionPanel.update(model.getSelectedCourse());
+        // show the stream options for this course
         streamSelectionPanel.refresh(model);
     }
 }

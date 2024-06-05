@@ -97,6 +97,7 @@ class Student {
      * Check to see if a new timetable addition will clash with existing enrolments
      * @param timetable New timetable to check
      * @return True if there is a clash, false otherwise.
+     * @author Skye Pooley
      */
     public boolean checkForClash(Timetable timetable) {
         for (Enrolment enrolment : currentEnrolments) {

@@ -19,6 +19,11 @@ public class Controller implements ActionListener {
         System.out.println("Controller Constructed");
     }
 
+    /**
+     * Captures an event from the view(s) and then decides what to do with it based on ActionCommands
+     * @param event the event to be processed
+     * @author Skye Pooley
+     */
     @Override
     public void actionPerformed(ActionEvent event) {
         System.out.print("Action caught in controller: ");
@@ -41,6 +46,12 @@ public class Controller implements ActionListener {
         }
     }
 
+    /**
+     * Get the option selected from a combo box
+     * @param eventSource ComboBox from the view
+     * @return A string containing the selected option, empty string if the source was not a comboBox
+     * @author Skye Pooley
+     */
     private String getComboOption(Object eventSource) {
         if (!(eventSource instanceof JComboBox)) { return ""; }
         JComboBox<String> source = (JComboBox) eventSource;

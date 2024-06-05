@@ -80,8 +80,9 @@ public class Timetable {
 
     /**
      * Check whether this timetable clashes with given timetable.
-     * @param timetable Timetable object to compare against.
+     * @param timetable New timetable to check with.
      * @return True if there is overlap between the timetable events, false otherwise.
+     * @author Skye Pooley
      */
     public boolean checkForClash(Timetable timetable) {
         if (timetable == null) { return false; }
@@ -97,6 +98,8 @@ public class Timetable {
     }
 
     private boolean checkEventClash(CalendarEvent event, Timetable timetable) {
+        // checks the event against all events in the existing timetable
+        // I am aware this makes the clash check O(n^2). the student will never have enough enrolments to make this an issue.
         return (event.checkForClash(timetable.getLecture())
                 || event.checkForClash(timetable.getTutorial())
                 || event.checkForClash(timetable.getLab()));
