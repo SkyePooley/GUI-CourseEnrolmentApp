@@ -65,6 +65,8 @@ public class View extends JFrame implements Observer {
         setVisible(true);
     }
 
+    //
+
     /**
      * Adds the given action listener to all gui elements of this panel
      * and to all contained panels.

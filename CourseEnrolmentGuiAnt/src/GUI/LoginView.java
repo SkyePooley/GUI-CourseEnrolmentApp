@@ -16,22 +16,22 @@ public class LoginView extends JDialog
     public LoginView(Frame owner){
         super(owner, "Login", true);
         setLayout(new GridLayout(3, 2));
-        
+
         add(new JLabel("Username:"));
         usernameField = new JTextField();
         add(usernameField);
-        
+
         add(new JLabel("Password:"));
         passwordField = new JPasswordField();
         add(passwordField);
-        
+
         loginButton = new JButton("Login");
         add(loginButton);
-        
+
         setSize(300, 150);
         setLocationRelativeTo(owner);
     }
-    
+
     public String getUsername(){
         return usernameField.getText();
     }
