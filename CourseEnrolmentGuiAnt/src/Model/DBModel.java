@@ -122,6 +122,7 @@ public class DBModel extends Observable {
 
         UpdateFlags flags = new UpdateFlags();
         flags.streamClashUpdate = true;
+        flags.scheduleUpdate = true;
         this.setChanged();
         notifyObservers(flags);
     }
@@ -147,10 +148,31 @@ public class DBModel extends Observable {
         notifyObservers(flags);
     }
 
-    public HashSet<Enrolment> getCurrentEnrolments() {
-        return student.getCurrentEnrolments();
+    /**
+     * Return the students current enrolments from the selected semester.
+     * @return HashSet containing enrolments
+     */
+    public HashSet<Enrolment> getCurrentSemesterEnrolments() {
+        HashSet<Enrolment> enrolments = new HashSet<>(student.getCurrentEnrolments().size());
+        for (Enrolment enrolment : student.getCurrentEnrolments()) {
+            if (enrolment.getSemester() == this.selectedSemester) {
+                enrolments.add(enrolment);
+            }
+        }
+        return enrolments;
     }
-    public HashSet<Enrolment> getTempEnrolments() {
-        return student.getTempEnrolments();
+
+    /**
+     * Return the student's temporary enrolments from selected semester.
+     * @return
+     */
+    public HashSet<Enrolment> getTempSemesterEnrolments() {
+        HashSet<Enrolment> enrolments = new HashSet<>(student.getTempEnrolments().size());
+        for (Enrolment enrolment : student.getTempEnrolments()) {
+            if (enrolment.getSemester() == this.selectedSemester) {
+                enrolments.add(enrolment);
+            }
+        }
+        return enrolments;
     }
 }

@@ -9,8 +9,6 @@
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/db.lck" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/db.lck" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/derby.log" beforeDir="false" afterPath="$PROJECT_DIR$/derby.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/SchedulePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/SchedulePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/CalendarEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/CalendarEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/DBModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/DBModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -144,7 +142,7 @@
       <workItem from="1717313827946" duration="33000" />
       <workItem from="1717371504725" duration="20693000" />
       <workItem from="1717477342197" duration="9999000" />
-      <workItem from="1717542231767" duration="13138000" />
+      <workItem from="1717542231767" duration="14875000" />
     </task>
     <servers />
   </component>

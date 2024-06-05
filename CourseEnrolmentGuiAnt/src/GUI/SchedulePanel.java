@@ -35,11 +35,11 @@ public class SchedulePanel extends JPanel implements DisplayPanel{
 
     public void update(DBModel model){
         clearEvents();
-        for (Enrolment enrolment : model.getCurrentEnrolments()) {
+        for (Enrolment enrolment : model.getCurrentSemesterEnrolments()) {
             addTimetable(enrolment.getCourse(), enrolment.getTimetable(), false);
         }
-        for (Enrolment enrolment : model.getTempEnrolments()) {
-            addTimetable(enrolment.getCourse(), enrolment.getTimetable(), true);
+        for (Enrolment enrolment : model.getTempSemesterEnrolments()) {
+            addTimetable("*"+enrolment.getCourse(), enrolment.getTimetable(), true);
         }
     }
 
