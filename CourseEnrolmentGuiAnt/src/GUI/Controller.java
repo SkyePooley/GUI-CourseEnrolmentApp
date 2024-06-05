@@ -44,6 +44,9 @@ public class Controller implements ActionListener {
             case "Add to Schedule":
                 model.addNewEnrolment();
                 break;
+            case "Revert Changes":
+                model.clearTempEnrolments();
+                break;
             default:
                 System.out.println("an unrecognised actionEvent was captured");
         }

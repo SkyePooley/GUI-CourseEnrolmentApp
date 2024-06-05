@@ -134,4 +134,11 @@ public class DBModel extends Observable {
         this.setChanged();
         notifyObservers(new UpdateFlags().scheduleUpdate=true);
     }
+
+    public void clearTempEnrolments() {
+        student.tempEnrolments.clear();
+        System.out.println(student);
+        this.setChanged();
+        notifyObservers(new UpdateFlags().scheduleUpdate=true);
+    }
 }
