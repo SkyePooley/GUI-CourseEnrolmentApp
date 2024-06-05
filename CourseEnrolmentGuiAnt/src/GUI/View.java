@@ -93,7 +93,7 @@ public class View extends JFrame implements Observer {
             if (flags.fullReset)            { this.reset(model); }
             if (flags.loginFail)            { this.loginFail(); }
             if (flags.loginSuccess)         { this.loginSuccess(model); }
-            if (flags.scheduleUpdate)       { this.updateSchedule(model); }
+            if (flags.scheduleUpdate)       { this.schedulePanel.update(model); }
             if (flags.courseDropdownUpdate) { this.selectionPanel.update(model); }
             if (flags.courseSelected)       { this.updateCourseDetails(model); }
             if (flags.streamClashUpdate)    { this.streamSelectionPanel.update(model); }
@@ -112,6 +112,8 @@ public class View extends JFrame implements Observer {
         // login was successful and the model has data on the user now.
         // close the login popup and show the main interface.
         // The model will also have data on the schedule but this will be a separate method.
+        schedulePanel.update(model);
+        selectionPanel.update(model);
     }
 
     private void updateSchedule(DBModel model) {

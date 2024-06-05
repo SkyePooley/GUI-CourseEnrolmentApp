@@ -5,6 +5,7 @@
 package Model;
 
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Observable;
 
@@ -132,13 +133,24 @@ public class DBModel extends Observable {
         System.out.println(student);
 
         this.setChanged();
-        notifyObservers(new UpdateFlags().scheduleUpdate=true);
+        UpdateFlags flags = new UpdateFlags();
+        flags.scheduleUpdate=true;
+        notifyObservers(flags);
     }
 
     public void clearTempEnrolments() {
         student.tempEnrolments.clear();
         System.out.println(student);
         this.setChanged();
-        notifyObservers(new UpdateFlags().scheduleUpdate=true);
+        UpdateFlags flags = new UpdateFlags();
+        flags.scheduleUpdate=true;
+        notifyObservers(flags);
+    }
+
+    public HashSet<Enrolment> getCurrentEnrolments() {
+        return student.getCurrentEnrolments();
+    }
+    public HashSet<Enrolment> getTempEnrolments() {
+        return student.getTempEnrolments();
     }
 }

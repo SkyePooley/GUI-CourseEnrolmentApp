@@ -56,6 +56,7 @@ public class CalendarEvent {
      */
     public boolean checkForClash(CalendarEvent event) {
         if (event == null) { return false; }
+        if (event.getEventDay() != this.eventDay) { return false; }
         // does the beginning of the given event fall inside this event
         boolean startClash = (event.getEventHour() >= this.eventHour && event.getEventHour() <= this.getEndHour());
         // does the ending of the given event fall inside this event
