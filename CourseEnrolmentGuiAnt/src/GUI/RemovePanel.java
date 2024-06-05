@@ -6,9 +6,9 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
-public class AddRemovePanel extends JPanel
+public class RemovePanel extends JPanel
 {
-    public AddRemovePanel()
+    public RemovePanel()
     {
         setLayout(new GridLayout(1, 2));
         JToggleButton addButton = new JToggleButton("Add");

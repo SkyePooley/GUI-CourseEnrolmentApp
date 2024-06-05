@@ -22,7 +22,7 @@ public class View extends JFrame implements Observer {
     private final double defaultScreenPortionH = 0.5;
 
     // keep references to panels here
-    private AddRemovePanel addRemovePanel;
+    private RemovePanel addRemovePanel;
     private SelectionPanel selectionPanel;
     private CourseDescriptionPanel courseDescriptionPanel;
     private StreamSelectionPanel streamSelectionPanel;
@@ -44,7 +44,7 @@ public class View extends JFrame implements Observer {
         
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         
-        this.addRemovePanel = new AddRemovePanel();
+        this.addRemovePanel = new RemovePanel();
         this.selectionPanel = new SelectionPanel();
         this.courseDescriptionPanel = new CourseDescriptionPanel();
         this.streamSelectionPanel = new StreamSelectionPanel();
