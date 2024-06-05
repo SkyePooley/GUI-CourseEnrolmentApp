@@ -5,6 +5,7 @@
 package Model;
 
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Observable;
 
@@ -121,6 +122,7 @@ public class DBModel extends Observable {
 
         UpdateFlags flags = new UpdateFlags();
         flags.streamClashUpdate = true;
+        flags.scheduleUpdate = true;
         this.setChanged();
         notifyObservers(flags);
     }
@@ -132,13 +134,45 @@ public class DBModel extends Observable {
         System.out.println(student);
 
         this.setChanged();
-        notifyObservers(new UpdateFlags().scheduleUpdate=true);
+        UpdateFlags flags = new UpdateFlags();
+        flags.scheduleUpdate=true;
+        notifyObservers(flags);
     }
 
     public void clearTempEnrolments() {
         student.tempEnrolments.clear();
         System.out.println(student);
         this.setChanged();
-        notifyObservers(new UpdateFlags().scheduleUpdate=true);
+        UpdateFlags flags = new UpdateFlags();
+        flags.scheduleUpdate=true;
+        notifyObservers(flags);
+    }
+
+    /**
+     * Return the students current enrolments from the selected semester.
+     * @return HashSet containing enrolments
+     */
+    public HashSet<Enrolment> getCurrentSemesterEnrolments() {
+        HashSet<Enrolment> enrolments = new HashSet<>(student.getCurrentEnrolments().size());
+        for (Enrolment enrolment : student.getCurrentEnrolments()) {
+            if (enrolment.getSemester() == this.selectedSemester) {
+                enrolments.add(enrolment);
+            }
+        }
+        return enrolments;
+    }
+
+    /**
+     * Return the student's temporary enrolments from selected semester.
+     * @return
+     */
+    public HashSet<Enrolment> getTempSemesterEnrolments() {
+        HashSet<Enrolment> enrolments = new HashSet<>(student.getTempEnrolments().size());
+        for (Enrolment enrolment : student.getTempEnrolments()) {
+            if (enrolment.getSemester() == this.selectedSemester) {
+                enrolments.add(enrolment);
+            }
+        }
+        return enrolments;
     }
 }

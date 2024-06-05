@@ -3,13 +3,15 @@
  */
 package GUI;
 
+import Model.DBModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
-public class SelectionPanel extends JPanel implements InteractivePanel {
+public class SelectionPanel extends JPanel implements InteractivePanel, DisplayPanel {
     public JComboBox<String> semesterComboBox;
     public JComboBox<String> courseComboBox;
 
@@ -41,10 +43,11 @@ public class SelectionPanel extends JPanel implements InteractivePanel {
 
     /**
      * Refresh all the courses in the course selection dropdown menu.
-     * @param courseCodes List of course codes in the selected semester
+     * @param model to retrieve list of course codes in the selected semester
      * @author Skye Pooley
      */
-    public void update(LinkedList<String> courseCodes) {
+    public void update(DBModel model) {
+        LinkedList<String> courseCodes = model.eligibleCourseCodes;
         courseComboBox.removeAllItems();
         for (String code : courseCodes) {
             courseComboBox.addItem(code);

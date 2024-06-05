@@ -26,10 +26,11 @@ public class View extends JFrame implements Observer {
     private SelectionPanel selectionPanel;
     private CourseDescriptionPanel courseDescriptionPanel;
     private StreamSelectionPanel streamSelectionPanel;
+    private SchedulePanel schedulePanel;
     private BottomPanel saveRevertPanel;
 
     // keep the GUI objects here
-    private JTable scheduleTable;
+
     
     public View() {
         // initialise GUI elements
@@ -52,16 +53,13 @@ public class View extends JFrame implements Observer {
         leftPanel.add(selectionPanel);
         leftPanel.add(courseDescriptionPanel);
         leftPanel.add(streamSelectionPanel);
-        
         add(leftPanel, BorderLayout.WEST);
-        
-        scheduleTable = new JTable(15, 5); // 15 time slots, 5 days for columns
-        JScrollPane scrollPane = new JScrollPane(scheduleTable);
-        add(scrollPane, BorderLayout.CENTER);
+
+        this.schedulePanel = new SchedulePanel();
+        add(schedulePanel, BorderLayout.CENTER);
 
         saveRevertPanel = new BottomPanel();
         add(saveRevertPanel, BorderLayout.SOUTH);
-        
         setVisible(true);
     }
 
@@ -97,8 +95,8 @@ public class View extends JFrame implements Observer {
             if (flags.fullReset)            { this.reset(model); }
             if (flags.loginFail)            { this.loginFail(); }
             if (flags.loginSuccess)         { this.loginSuccess(model); }
-            if (flags.scheduleUpdate)       { this.updateSchedule(model); }
-            if (flags.courseDropdownUpdate) { this.updateCourseDropdown(model); }
+            if (flags.scheduleUpdate)       { this.schedulePanel.update(model); }
+            if (flags.courseDropdownUpdate) { this.selectionPanel.update(model); }
             if (flags.courseSelected)       { this.updateCourseDetails(model); }
             if (flags.streamClashUpdate)    { this.streamSelectionPanel.update(model); }
         }
@@ -116,6 +114,8 @@ public class View extends JFrame implements Observer {
         // login was successful and the model has data on the user now.
         // close the login popup and show the main interface.
         // The model will also have data on the schedule but this will be a separate method.
+        schedulePanel.update(model);
+        selectionPanel.update(model);
     }
 
     private void updateSchedule(DBModel model) {
@@ -123,15 +123,10 @@ public class View extends JFrame implements Observer {
         // this will be called after a course is added, course confirmed, or user logged in.
     }
 
-    private void updateCourseDropdown(DBModel model) {
-        // Model has found all the courses in the selected semester, use this to fill the course selection dropdown
-        selectionPanel.update(model.eligibleCourseCodes);
-    }
-
     private void updateCourseDetails(DBModel model) {
         // After a course was selected from the dropdown menu the model has prepared into on it
         // Update the course info panel
-        courseDescriptionPanel.update(model.getSelectedCourse());
+        courseDescriptionPanel.update(model);
         // show the stream options for this course
         streamSelectionPanel.refresh(model);
     }

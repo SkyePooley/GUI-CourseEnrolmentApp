@@ -4,11 +4,12 @@
 package GUI;
 
 import Model.Course;
+import Model.DBModel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class CourseDescriptionPanel extends JPanel {
+public class CourseDescriptionPanel extends JPanel implements DisplayPanel{
     private JLabel title;
     private JTextArea courseDescriptionArea;
 
@@ -27,10 +28,11 @@ public class CourseDescriptionPanel extends JPanel {
 
     /**
      * Update the course description with a new course
-     * @param course Course to show
+     * @param model to retrieve current course
      * @author Skye Pooley
      */
-    public void update(Course course) {
+    public void update(DBModel model) {
+        Course course = model.getSelectedCourse();
         title.setText(course.getCode());
         courseDescriptionArea.setText(course.toString());
     }
