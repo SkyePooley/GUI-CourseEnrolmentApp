@@ -30,8 +30,6 @@ public class View extends JFrame implements Observer {
 
     // keep the GUI objects here
     private JTable scheduleTable;
-    private JButton revertChangesButton;
-    private JButton confirmAndSaveButton;
     
     public View() {
         // initialise GUI elements
@@ -100,6 +98,7 @@ public class View extends JFrame implements Observer {
             if (flags.scheduleUpdate)       { this.updateSchedule(model); }
             if (flags.courseDropdownUpdate) { this.updateCourseDropdown(model); }
             if (flags.courseSelected)       { this.updateCourseDetails(model); }
+            if (flags.streamClashUpdate)    { this.streamSelectionPanel.update(model); }
         }
     }
 
@@ -131,6 +130,8 @@ public class View extends JFrame implements Observer {
         // After a course was selected from the dropdown menu the model has prepared into on it
         // Update the course info panel
         courseDescriptionPanel.update(model.getSelectedCourse());
+        // show the stream options for this course
+        streamSelectionPanel.refresh(model);
     }
 }
 
