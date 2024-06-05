@@ -26,10 +26,11 @@ public class View extends JFrame implements Observer {
     private SelectionPanel selectionPanel;
     private CourseDescriptionPanel courseDescriptionPanel;
     private StreamSelectionPanel streamSelectionPanel;
+    private SchedulePanel schedulePanel;
     private BottomPanel saveRevertPanel;
 
     // keep the GUI objects here
-    private JTable scheduleTable;
+
     
     public View() {
         // initialise GUI elements
@@ -52,16 +53,13 @@ public class View extends JFrame implements Observer {
         leftPanel.add(selectionPanel);
         leftPanel.add(courseDescriptionPanel);
         leftPanel.add(streamSelectionPanel);
-        
         add(leftPanel, BorderLayout.WEST);
-        
-        scheduleTable = new JTable(15, 5); // 15 time slots, 5 days for columns
-        JScrollPane scrollPane = new JScrollPane(scheduleTable);
-        add(scrollPane, BorderLayout.CENTER);
+
+        this.schedulePanel = new SchedulePanel();
+        add(schedulePanel, BorderLayout.CENTER);
 
         saveRevertPanel = new BottomPanel();
         add(saveRevertPanel, BorderLayout.SOUTH);
-        
         setVisible(true);
     }
 
