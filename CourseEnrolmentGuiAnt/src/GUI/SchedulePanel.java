@@ -8,8 +8,13 @@ import Model.Timetable;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Displays the student's schedule on the view.
+ * Makes used of a JTable to display the schedule on a grid
+ * @author Skye Pooley
+ */
 public class SchedulePanel extends JPanel implements DisplayPanel{
-    private JTable scheduleTable;
+    private final JTable scheduleTable;
 
     public SchedulePanel() {
         BorderLayout layout = new BorderLayout(5, 5);
@@ -19,6 +24,11 @@ public class SchedulePanel extends JPanel implements DisplayPanel{
         add(new JScrollPane(scheduleTable), BorderLayout.CENTER);
     }
 
+    /**
+     * Creates a new JTable and initialises its values to show the days of the week and hours of the day.
+     * @return JTable formatted for schedule display
+     * @author Skye Pooley
+     */
     private JTable tableSetup() {
         String[] columnLabels = {"Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
         String[][] startingData = new String[16][6];
@@ -33,42 +43,57 @@ public class SchedulePanel extends JPanel implements DisplayPanel{
         return table;
     }
 
+    /**
+     * Clear the current schedule display and replace it with the latest info from the model
+     * @param model DBModel to retrieve schedule info
+     * @author Skye Pooley
+     */
     public void update(DBModel model){
         clearEvents();
         for (Enrolment enrolment : model.getCurrentSemesterEnrolments()) {
-            addTimetable(enrolment.getCourse(), enrolment.getTimetable(), false);
+            addTimetable(enrolment.getCourse(), enrolment.getTimetable());
         }
         for (Enrolment enrolment : model.getTempSemesterEnrolments()) {
-            addTimetable("*"+enrolment.getCourse(), enrolment.getTimetable(), true);
+            addTimetable("*"+enrolment.getCourse(), enrolment.getTimetable());
         }
     }
 
-    private void addTimetable(String title, Timetable timetable, boolean temporary) {
+    /**
+     * Adds a single timetable onto the table.
+     * @param title Course code or name to display on events from this timetable
+     * @param timetable Timetable to find event times
+     * @author Skye Pooley
+     */
+    private void addTimetable(String title, Timetable timetable) {
         addEvent(
                 title,
                 "Lecture",
-                timetable.getLecture(),
-                temporary
+                timetable.getLecture()
         );
         if (timetable.hasTutorial()) {
             addEvent(
                     title,
                     "Tutorial",
-                    timetable.getTutorial(),
-                    temporary
+                    timetable.getTutorial()
             );
         }
         if (timetable.hasLab()) {
             addEvent(
                     title,
                     "Lab",
-                    timetable.getLab(),
-                    temporary
+                    timetable.getLab()
             );
         }
     }
 
-    private void addEvent(String title, String subtitle, CalendarEvent event, boolean temp) {
+    /**
+     * Add an event to the schedule view
+     * @param title Title of the event, typically course code
+     * @param subtitle Subtitle, typically event type
+     * @param event event for timings
+     * @author Skye Pooley
+     */
+    private void addEvent(String title, String subtitle, CalendarEvent event) {
         String label = title + " - " + subtitle;
         for (int i= event.getEventHour()-8; i<event.getEndHour()-7; i++) {
             // this is gross but a better way was not obvious
@@ -92,6 +117,10 @@ public class SchedulePanel extends JPanel implements DisplayPanel{
         }
     }
 
+    /**
+     * Set all the event cells on the table blank.
+     * @author Skye Pooley
+     */
     private void clearEvents() {
         for (int column=1; column<scheduleTable.getColumnCount(); column++ ) {
             for (int row = 0; row < scheduleTable.getRowCount(); row++) {
