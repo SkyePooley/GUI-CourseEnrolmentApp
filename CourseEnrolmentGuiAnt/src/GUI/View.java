@@ -14,6 +14,7 @@ import Model.UpdateFlags;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.rmi.server.RemoteCall;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -28,6 +29,10 @@ public class View extends JFrame implements Observer {
     private StreamSelectionPanel streamSelectionPanel;
     private SchedulePanel schedulePanel;
     private BottomPanel saveRevertPanel;
+    private JTabbedPane tabbedPane;
+    private JTable scheduleTable;
+    private JButton revertButton;
+    private JButton confirmAndSaveButton;
 
     // keep the GUI objects here
 
@@ -41,19 +46,31 @@ public class View extends JFrame implements Observer {
         setSize((int) (screenSize.getWidth() * defaultScreenPortionW), (int) (screenSize.getHeight() * defaultScreenPortionH));
         
         //adding components
-        JPanel leftPanel = new JPanel();
-        
-        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+
+        tabbedPane = new JTabbedPane();
+
+
+        JPanel addPanel = new JPanel();
+
+        addPanel.setLayout(new BoxLayout(addPanel, BoxLayout.Y_AXIS));
         
         this.addRemovePanel = new RemovePanel();
         this.selectionPanel = new SelectionPanel();
         this.courseDescriptionPanel = new CourseDescriptionPanel();
         this.streamSelectionPanel = new StreamSelectionPanel();
-        leftPanel.add(addRemovePanel);
-        leftPanel.add(selectionPanel);
-        leftPanel.add(courseDescriptionPanel);
-        leftPanel.add(streamSelectionPanel);
-        add(leftPanel, BorderLayout.WEST);
+        addPanel.add(addRemovePanel);
+        addPanel.add(selectionPanel);
+        addPanel.add(courseDescriptionPanel);
+        addPanel.add(streamSelectionPanel);
+        add(addPanel, BorderLayout.WEST);
+
+        addRemovePanel = new RemovePanel();
+
+        tabbedPane.addTab("Add Enrolment", addPanel);
+        tabbedPane.addTab("Remove Enrolment", addRemovePanel);
+
+        add(tabbedPane, BorderLayout.WEST);
+
 
         this.schedulePanel = new SchedulePanel();
         add(schedulePanel, BorderLayout.CENTER);
@@ -76,6 +93,7 @@ public class View extends JFrame implements Observer {
         selectionPanel.addActionListener(listener);
         streamSelectionPanel.addActionListener(listener);
         saveRevertPanel.addActionListener(listener);
+        addRemovePanel.addActionListener(listener);
     }
 
     /**
@@ -129,6 +147,11 @@ public class View extends JFrame implements Observer {
         courseDescriptionPanel.update(model);
         // show the stream options for this course
         streamSelectionPanel.refresh(model);
+    }
+
+    private void updateEnrolments(DBModel model) {
+        schedulePanel.update(model);
+        selectionPanel.update(model);
     }
 }
 
