@@ -89,6 +89,10 @@ class Student {
         for (Enrolment currentEnrolment : currentEnrolments) {
             output += currentEnrolment.toString();
         }
+        output += "\nTemp Enrolments:\n";
+        for (Enrolment tempEnrolmenr : tempEnrolments) {
+            output += tempEnrolmenr.toString();
+        }
 
         return output;
     }

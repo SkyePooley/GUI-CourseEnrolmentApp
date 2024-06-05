@@ -41,6 +41,9 @@ public class Controller implements ActionListener {
                 if (option != null)
                     model.updateSelectedStream(Integer.parseInt(option));
                 break;
+            case "Add to Schedule":
+                model.addNewEnrolment();
+                break;
             default:
                 System.out.println("an unrecognised actionEvent was captured");
         }

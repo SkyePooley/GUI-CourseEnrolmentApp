@@ -22,6 +22,7 @@ public class DBModel extends Observable {
     private int selectedSemester = 1;
     private Course selectedCourse;
     private int selectedStream;
+    private Timetable selectedTimetable;
     public boolean streamClash = false;
     
     public DBModel() {
@@ -115,11 +116,22 @@ public class DBModel extends Observable {
         selectedStream = streamIndex-1; // menu starts at one, data structure starts at zero
         LinkedList<Timetable> timetables = selectedSemester == 1 ? selectedCourse.getSemOneTimetables() : selectedCourse.getSemTwoTimetables();
         streamClash = student.checkForClash(timetables.get(selectedStream));
+        selectedTimetable = timetables.get(selectedStream);
         System.out.println(selectedCourse.getCode() + " Stream " + streamIndex + " Clash " + streamClash);
 
         UpdateFlags flags = new UpdateFlags();
         flags.streamClashUpdate = true;
         this.setChanged();
         notifyObservers(flags);
+    }
+
+    public void addNewEnrolment() {
+        if (streamClash) { return; }
+        Enrolment newEnrolment = new Enrolment(selectedCourse.getCode(), selectedTimetable);
+        student.tempEnrolments.add(newEnrolment);
+        System.out.println(student);
+
+        this.setChanged();
+        notifyObservers(new UpdateFlags().scheduleUpdate=true);
     }
 }
