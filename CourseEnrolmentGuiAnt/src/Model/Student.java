@@ -42,9 +42,9 @@ class Student {
 
         // get current enrolments as enrolment objects
         ResultSet currentEnrolmentRows = dbManager.query(
-                "SELECT t.*\n" +
-                "FROM CURRENT_ENROLMENT e, TIMETABLE t\n" +
-                "WHERE e.\"StudentId\" = '22179237'\n" +
+                "SELECT t.*\n " +
+                "FROM CURRENT_ENROLMENT e, TIMETABLE t\n " +
+                "WHERE e.\"StudentId\" = '" + this.getStudentId() + "' \n" +
                 "AND e.\"TimetableId\" = t.\"TimetableID\"");
         while (currentEnrolmentRows.next()) {
             Timetable timetable = new Timetable(currentEnrolmentRows);
