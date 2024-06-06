@@ -3,12 +3,15 @@
  */
 package GUI;
 
+import Model.DBModel;
+import Model.Enrolment;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class RemovePanel extends JPanel implements InteractivePanel
+public class RemovePanel extends JPanel implements InteractivePanel, DisplayPanel
 {
 
     private JComboBox<String> enrolmentComboBox;
@@ -27,10 +30,11 @@ public class RemovePanel extends JPanel implements InteractivePanel
         add(removeButton);
     }
 
-    public void updateEnrolments(List<String> enrolments){
+    @Override
+    public void update(DBModel model) {
         enrolmentComboBox.removeAllItems();
-        for (String enrolment : enrolments){
-            enrolmentComboBox.addItem(enrolment);
+        for (Enrolment enrolment : model.getCurrentSemesterEnrolments()){
+            enrolmentComboBox.addItem(enrolment.getCourse());
         }
     }
 

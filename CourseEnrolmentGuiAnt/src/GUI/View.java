@@ -103,7 +103,7 @@ public class View extends JFrame implements Observer {
             DBModel model = (DBModel) obs;
 
             if (flags.loginSuccess)         { this.loginSuccess(model); }
-            if (flags.scheduleUpdate)       { this.schedulePanel.update(model); }
+            if (flags.scheduleUpdate)       { this.updateEnrolments(model); }
             if (flags.courseDropdownUpdate) { this.selectionPanel.update(model); }
             if (flags.courseSelected)       { this.updateCourseDetails(model); }
             if (flags.streamClashUpdate)    { this.streamSelectionPanel.update(model); }
@@ -128,6 +128,7 @@ public class View extends JFrame implements Observer {
         schedulePanel.update(model);    // display users enrolments on schedule
         selectionPanel.update(model);   // update the available course dropdown
         saveRevertPanel.update(model);  // display the user's name on the bottom row
+        removeCoursePanel.update(model);// display user's current enrolments in dropdown
         loginPopup.dispose();
         this.setVisible(true);
     }
@@ -144,6 +145,7 @@ public class View extends JFrame implements Observer {
     private void updateEnrolments(DBModel model) {
         schedulePanel.update(model);
         selectionPanel.update(model);
+        removeCoursePanel.update(model);
     }
 }
 
