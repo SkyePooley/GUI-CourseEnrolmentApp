@@ -48,14 +48,23 @@ public class DBModel extends Observable {
     }
 
     public void login(String studentId) {
+        System.out.println("login attempt " + studentId);
         UpdateFlags update = new UpdateFlags();
         try {
             this.student = Student.getStudent(studentId, dbManager);
-            if (student != null) { update.loginSuccess = true; } else { update.loginFail = true; }
+            if (student != null) {
+                update.loginSuccess = true;
+                updateEligibleCourses(1);
+            }
+            else {
+                update.loginFail = true;
+            }
+
             this.setChanged();
             notifyObservers(update);
+
         } catch (SQLException e) {
-            System.out.println("Something went wrong while attempting student login with ID " + studentId);
+            System.out.println("Something went wrong while looking up student login with ID " + studentId);
             e.printStackTrace();
         }
         System.out.println(student);
@@ -91,21 +100,6 @@ public class DBModel extends Observable {
         flags.courseSelected = true;
         this.setChanged();
         notifyObservers(flags);
-    }
-
-    public Course getSelectedCourse() {
-        return this.selectedCourse;
-    }
-
-    /**
-     * Get the number of streams available for this course in this semester
-     * @return int number of streams
-     */
-    public int getNumberOfStreams() {
-        if (selectedSemester == 1) {
-            return selectedCourse.getSemOneTimetables().size();
-        }
-        return selectedCourse.getSemTwoTimetables().size();
     }
 
     /**
@@ -174,5 +168,24 @@ public class DBModel extends Observable {
             }
         }
         return enrolments;
+    }
+
+    public Course getSelectedCourse() {
+        return this.selectedCourse;
+    }
+
+    /**
+     * Get the number of streams available for this course in this semester
+     * @return int number of streams
+     */
+    public int getNumberOfStreams() {
+        if (selectedSemester == 1) {
+            return selectedCourse.getSemOneTimetables().size();
+        }
+        return selectedCourse.getSemTwoTimetables().size();
+    }
+
+    public String getUserFullName() {
+        return student.getFullName();
     }
 }

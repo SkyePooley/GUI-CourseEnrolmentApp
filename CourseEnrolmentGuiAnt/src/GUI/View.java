@@ -14,7 +14,6 @@ import Model.UpdateFlags;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.rmi.server.RemoteCall;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -23,19 +22,16 @@ public class View extends JFrame implements Observer {
     private final double defaultScreenPortionH = 0.5;
 
     // keep references to panels here
-    private RemovePanel addRemovePanel;
+    private RemovePanel removeCoursePanel;
     private SelectionPanel selectionPanel;
     private CourseDescriptionPanel courseDescriptionPanel;
     private StreamSelectionPanel streamSelectionPanel;
     private SchedulePanel schedulePanel;
     private BottomPanel saveRevertPanel;
     private JTabbedPane tabbedPane;
-    private JTable scheduleTable;
-    private JButton revertButton;
-    private JButton confirmAndSaveButton;
 
-    // keep the GUI objects here
-
+    // Popup windows
+    LoginView loginPopup;
     
     public View() {
         // initialise GUI elements
@@ -46,41 +42,37 @@ public class View extends JFrame implements Observer {
         setSize((int) (screenSize.getWidth() * defaultScreenPortionW), (int) (screenSize.getHeight() * defaultScreenPortionH));
         
         //adding components
-
         tabbedPane = new JTabbedPane();
 
+        JPanel addCoursePanel = new JPanel();
 
-        JPanel addPanel = new JPanel();
-
-        addPanel.setLayout(new BoxLayout(addPanel, BoxLayout.Y_AXIS));
+        addCoursePanel.setLayout(new BoxLayout(addCoursePanel, BoxLayout.Y_AXIS));
         
-        this.addRemovePanel = new RemovePanel();
+        this.removeCoursePanel = new RemovePanel();
         this.selectionPanel = new SelectionPanel();
         this.courseDescriptionPanel = new CourseDescriptionPanel();
         this.streamSelectionPanel = new StreamSelectionPanel();
-        addPanel.add(addRemovePanel);
-        addPanel.add(selectionPanel);
-        addPanel.add(courseDescriptionPanel);
-        addPanel.add(streamSelectionPanel);
-        add(addPanel, BorderLayout.WEST);
+        addCoursePanel.add(removeCoursePanel);
+        addCoursePanel.add(selectionPanel);
+        addCoursePanel.add(courseDescriptionPanel);
+        addCoursePanel.add(streamSelectionPanel);
+        add(addCoursePanel, BorderLayout.WEST);
 
-        addRemovePanel = new RemovePanel();
+        removeCoursePanel = new RemovePanel();
 
-        tabbedPane.addTab("Add Enrolment", addPanel);
-        tabbedPane.addTab("Remove Enrolment", addRemovePanel);
-
+        tabbedPane.addTab("Add Enrolment", addCoursePanel);
+        tabbedPane.addTab("Remove Enrolment", removeCoursePanel);
         add(tabbedPane, BorderLayout.WEST);
-
 
         this.schedulePanel = new SchedulePanel();
         add(schedulePanel, BorderLayout.CENTER);
 
         saveRevertPanel = new BottomPanel();
         add(saveRevertPanel, BorderLayout.SOUTH);
-        setVisible(true);
+
+        this.loginPopup = new LoginView(this);
     }
 
-    //
 
     /**
      * Adds the given action listener to all gui elements of this panel
@@ -93,7 +85,8 @@ public class View extends JFrame implements Observer {
         selectionPanel.addActionListener(listener);
         streamSelectionPanel.addActionListener(listener);
         saveRevertPanel.addActionListener(listener);
-        addRemovePanel.addActionListener(listener);
+        removeCoursePanel.addActionListener(listener);
+        loginPopup.addActionListener(listener);
     }
 
     /**
@@ -110,8 +103,6 @@ public class View extends JFrame implements Observer {
             UpdateFlags flags = (UpdateFlags) obj;
             DBModel model = (DBModel) obs;
 
-            if (flags.fullReset)            { this.reset(model); }
-            if (flags.loginFail)            { this.loginFail(); }
             if (flags.loginSuccess)         { this.loginSuccess(model); }
             if (flags.scheduleUpdate)       { this.schedulePanel.update(model); }
             if (flags.courseDropdownUpdate) { this.selectionPanel.update(model); }
@@ -120,26 +111,28 @@ public class View extends JFrame implements Observer {
         }
     }
 
-    private void reset(DBModel model) {
-        // changes have been discarded, reload all panels using model data
+    public void openLoginPopup() {
+        loginPopup.setVisible(true);
     }
 
-    private void loginFail() {
-        // ID given was not valid, show a login error message
-    }
-
+    /**
+     * Called after a user successfully logs in.
+     * Completes setup of the main window, disposes of the login popup, and shows the main window.
+     * @param model Retrieve information for window setup
+     * @author Skye Pooley
+     */
     private void loginSuccess(DBModel model) {
         // login was successful and the model has data on the user now.
         // close the login popup and show the main interface.
         // The model will also have data on the schedule but this will be a separate method.
-        schedulePanel.update(model);
-        selectionPanel.update(model);
+        System.out.println("login success");
+        schedulePanel.update(model);    // display users enrolments on schedule
+        selectionPanel.update(model);   // update the available course dropdown
+        saveRevertPanel.update(model);  // display the user's name on the bottom row
+        loginPopup.dispose();
+        this.setVisible(true);
     }
 
-    private void updateSchedule(DBModel model) {
-        // the model has new data on the schedule, refresh the panel.
-        // this will be called after a course is added, course confirmed, or user logged in.
-    }
 
     private void updateCourseDetails(DBModel model) {
         // After a course was selected from the dropdown menu the model has prepared into on it

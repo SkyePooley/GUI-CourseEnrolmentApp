@@ -30,6 +30,9 @@ public class Controller implements ActionListener {
         System.out.println(event.getActionCommand());
 
         switch (event.getActionCommand()) {
+            case "Login":
+                model.login(view.loginPopup.getUsername());
+                break;
             case "Semester Selected":
                 model.updateEligibleCourses(Integer.parseInt(getComboOption(event.getSource())));
                 break;
