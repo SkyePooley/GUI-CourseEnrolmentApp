@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 /**
  * Holds basic information on a student as well as all their enrolments.
@@ -68,10 +69,27 @@ class Student {
 
     /**
      * Shift all temporary enrolments into the current enrolments, clear temp enrolments.
+     * Save new list of enrolments to the database
      */
-    public void confirmEnrolments() {
+    public void confirmEnrolments(DBManager database) {
         currentEnrolments.addAll(tempEnrolments);
         tempEnrolments.clear();
+        // admin account stays blank
+        if (!studentId.equals("admin"))
+            saveEnrolments(database);
+    }
+
+    /**
+     * Delete the students current enrolment entries on the database, then write out all the current enrolments from application.
+     * @param database Database manager to execute updates.
+     */
+    private void saveEnrolments(DBManager database) {
+        database.update("DELETE FROM \"CURRENT_ENROLMENT\" WHERE \"StudentId\" = '" + studentId + "'");
+        LinkedList<String> commands = new LinkedList<>();
+        for (Enrolment enrolment : currentEnrolments) {
+            commands.add("INSERT INTO \"CURRENT_ENROLMENT\" VALUES ('" + studentId + "', '" + enrolment.getCourse() + "', " + enrolment.getTableIndex() + ")");
+        }
+        database.updateBatch(commands);
     }
 
     /**

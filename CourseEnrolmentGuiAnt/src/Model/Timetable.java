@@ -18,6 +18,7 @@ public class Timetable {
     private CalendarEvent lab;
     private CalendarEvent tutorial;
     private final int semester;
+    final int tableIndex;
 
     /**
      * Construct a course timetable from database query result
@@ -26,6 +27,7 @@ public class Timetable {
      */
     public Timetable(ResultSet rs) throws SQLException {
         this.semester = rs.getInt("Semester");
+        this.tableIndex = rs.getInt("TimetableID");
         this.lecture = CalendarEvent.getCalendarEvent(
                 DayOfWeek.valueOf(rs.getString("LectureDay")),
                 rs.getInt("LectureTime"),
@@ -45,23 +47,6 @@ public class Timetable {
                     rs.getInt("TutorialTime"),
                     rs.getInt("TutorialDuration")
             );
-        }
-    }
-
-    /**
-     * Create a new set of timetable events for a course.
-     * Lecture session is mandatory and set in constructor.
-     * @param lectureDay String matching weekday in java.time.DayOfWeek
-     * @param lectureHour int 0-23 representing the hour that the event starts in 24 hour time
-     * @param lectureDuration int 1-23 representing the number of hours event runs for
-     * @see java.time.DayOfWeek
-     * @author Skye Pooley
-     */
-    public Timetable(String lectureDay, int lectureHour, int lectureDuration, int semester) {
-        this.semester = semester;
-        this.lecture = CalendarEvent.getCalendarEvent(DayOfWeek.valueOf(lectureDay), lectureHour, lectureDuration);
-        if (this.getLecture() == null) {
-            System.out.println("Invalid time or duration given" + this);
         }
     }
 

@@ -50,6 +50,9 @@ public class Controller implements ActionListener {
             case "Revert Changes":
                 model.clearTempEnrolments();
                 break;
+            case "Confirm and Save":
+                model.confirmEnrolments();
+                break;
             default:
                 System.out.println("an unrecognised actionEvent was captured");
         }

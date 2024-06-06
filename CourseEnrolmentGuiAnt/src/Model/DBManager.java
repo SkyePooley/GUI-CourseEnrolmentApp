@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
 public class DBManager {
     private static final String USER_NAME = "spcr";
     private static final String PASSWORD  = "spcr";
-    private static final String DB_URL    = "jdbc:derby:EnrolmentDatabase; create=true";
+    private static final String DB_URL    = "jdbc:derby:EnrolmentDatabase;";
     private static DBManager dbManagerInstance;
     
     private Connection connection;
@@ -25,20 +26,10 @@ public class DBManager {
         establishConnection();
     }
 
-    public static void main(String[] args) {
-        String courseCode = "COMP500";
-        DBManager db = new DBManager();
-        try {
-            ResultSet rs = db.query("SELECT * FROM TIMETABLE " +
-                    "WHERE \"CourseCode\" = '" + courseCode + "'");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /**
      * Get a reference to the static instance of the database manager
-     * @return reference to DBManager instnace.
+     * A new database connection will be opened if one does not already exist
+     * @return reference to DBManager instance.
      */
     public static synchronized DBManager getDBManager() {
         if (dbManagerInstance != null)
@@ -76,12 +67,12 @@ public class DBManager {
     /**
      * Execute the given query on the EnrolmentDatabase
      * SQL errors are caught and printed on the console.
-     * @param sqlStatement SQL statement following apache derby syntax
+     * @param sql SQL statement following apache derby syntax
      * @return Returns a resultset if the query was valid, null otherwise.
      */
-    protected ResultSet query(String sqlStatement) throws SQLException{
+    protected ResultSet query(String sql) throws SQLException{
         Statement statement = this.connection.createStatement();
-        return statement.executeQuery(sqlStatement);
+        return statement.executeQuery(sql);
     }
 
     /**
@@ -97,6 +88,22 @@ public class DBManager {
         catch (SQLException e) {
             System.out.println("Statement failed: " + sqlStatement);
             System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Executes the given statements as a batch.
+     * @param statements LinkedList containing derby SQL statements
+     */
+    protected void updateBatch(LinkedList<String> statements) {
+        try {
+            Statement statement = connection.createStatement();
+            for (String sqlStatement : statements) {
+                statement.addBatch(sqlStatement);
+            }
+            statement.executeBatch();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

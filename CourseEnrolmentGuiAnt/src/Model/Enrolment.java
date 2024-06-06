@@ -32,4 +32,6 @@ public class Enrolment {
     public int getSemester() {
         return timetable.getSemester();
     }
+
+    public int getTableIndex() { return timetable.tableIndex; }
 }

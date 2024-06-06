@@ -7,8 +7,22 @@
     <list default="true" id="24a38822-ca8c-4f2f-879b-c2d0954acfa2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/db.lck" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/db.lck" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/log.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/log.ctrl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/log1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/log1.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/logmirror.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/logmirror.ctrl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c500.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c500.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c511.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c511.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c560.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c560.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c571.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c571.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c581.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c581.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c591.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c591.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/derby.log" beforeDir="false" afterPath="$PROJECT_DIR$/derby.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/DBManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/DBModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/DBModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Enrolment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Enrolment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Timetable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Timetable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

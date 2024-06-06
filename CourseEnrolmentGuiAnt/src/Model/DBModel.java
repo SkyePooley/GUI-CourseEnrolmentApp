@@ -42,11 +42,6 @@ public class DBModel extends Observable {
         //dbManager.closeConnections();
     }
 
-    public void refresh() {
-        courses = new CourseCollectionManager(dbManager);
-        // refresh student
-    }
-
     public void login(String studentId) {
         System.out.println("login attempt " + studentId);
         UpdateFlags update = new UpdateFlags();
@@ -139,6 +134,14 @@ public class DBModel extends Observable {
         this.setChanged();
         UpdateFlags flags = new UpdateFlags();
         flags.scheduleUpdate=true;
+        notifyObservers(flags);
+    }
+
+    public void confirmEnrolments() {
+        student.confirmEnrolments(dbManager);
+        UpdateFlags flags = new UpdateFlags();
+        flags.scheduleUpdate = true;
+        setChanged();
         notifyObservers(flags);
     }
 
