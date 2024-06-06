@@ -34,6 +34,7 @@ public class SchedulePanel extends JPanel implements DisplayPanel{
         String[][] startingData = new String[16][6];
         JTable table = new JTable(startingData, columnLabels);
         table.setRowHeight(30);
+        table.getTableHeader().setReorderingAllowed(false);
 
         for (int i=0; i<table.getRowCount(); i++) {
             String value = i+8 + ":00";
