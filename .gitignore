@@ -4,4 +4,10 @@
 /CourseEnrolmentGuiAnt/build/
 /CourseEnrolmentGuiAnt/dist/
 /CourseEnrolmentGuiAnt/log/
-/CourseEnrolmentGuiAnt/derby.log
+/CourseEnrolmentGuiAnt/derby.log/
+/.idea/
+/CourseEnrolmentGuiAnt/EnrolmentDatabase/db.lck/
+
+CourseEnrolmentGuiAnt/.idea/workspace.xml
+CourseEnrolmentGuiAnt/derby.log
+CourseEnrolmentGuiAnt/EnrolmentDatabase/db.lck
