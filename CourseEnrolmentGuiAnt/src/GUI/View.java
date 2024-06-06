@@ -22,52 +22,51 @@ public class View extends JFrame implements Observer {
     private final double defaultScreenPortionH = 0.5;
 
     // keep references to panels here
-    private RemovePanel removeCoursePanel;
-    private SelectionPanel selectionPanel;
-    private CourseDescriptionPanel courseDescriptionPanel;
-    private StreamSelectionPanel streamSelectionPanel;
-    private SchedulePanel schedulePanel;
-    private BottomPanel saveRevertPanel;
-    private JTabbedPane tabbedPane;
+    private final RemovePanel removeCoursePanel;
+    private final JPanel addCoursePanel;
+    private final SelectionPanel selectionPanel;
+    private final CourseDescriptionPanel courseDescriptionPanel;
+    private final StreamSelectionPanel streamSelectionPanel;
+    private final SchedulePanel schedulePanel;
+    private final SaveRevertPanel saveRevertPanel;
+    private final JTabbedPane tabbedPane;
 
     // Popup windows
-    LoginView loginPopup;
+    final LoginView loginPopup;
     
     public View() {
-        // initialise GUI elements
+        // initialise window
         setTitle("Course Enrolment Application");
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         setLocation(100, 100);
         setSize((int) (screenSize.getWidth() * defaultScreenPortionW), (int) (screenSize.getHeight() * defaultScreenPortionH));
         
-        //adding components
-        tabbedPane = new JTabbedPane();
-
-        JPanel addCoursePanel = new JPanel();
-
+        //Components for adding new enrolments
+        this.addCoursePanel = new JPanel();
         addCoursePanel.setLayout(new BoxLayout(addCoursePanel, BoxLayout.Y_AXIS));
-        
-        this.removeCoursePanel = new RemovePanel();
         this.selectionPanel = new SelectionPanel();
         this.courseDescriptionPanel = new CourseDescriptionPanel();
         this.streamSelectionPanel = new StreamSelectionPanel();
-        addCoursePanel.add(removeCoursePanel);
         addCoursePanel.add(selectionPanel);
         addCoursePanel.add(courseDescriptionPanel);
         addCoursePanel.add(streamSelectionPanel);
-        add(addCoursePanel, BorderLayout.WEST);
 
-        removeCoursePanel = new RemovePanel();
+        // Components for removing enrolments
+        this.removeCoursePanel = new RemovePanel();
 
+        // Tabs to switch between adding and removing enrolments
+        tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Add Enrolment", addCoursePanel);
         tabbedPane.addTab("Remove Enrolment", removeCoursePanel);
         add(tabbedPane, BorderLayout.WEST);
 
+        // Calendar view for visualising enrolments
         this.schedulePanel = new SchedulePanel();
         add(schedulePanel, BorderLayout.CENTER);
 
-        saveRevertPanel = new BottomPanel();
+        // Buttons to either revert changes or save to db
+        saveRevertPanel = new SaveRevertPanel();
         add(saveRevertPanel, BorderLayout.SOUTH);
 
         this.loginPopup = new LoginView(this);
@@ -81,7 +80,6 @@ public class View extends JFrame implements Observer {
      * @author Skye Pooley
      */
     public void addActionListener(ActionListener listener) {
-        // add to interactives in panels
         selectionPanel.addActionListener(listener);
         streamSelectionPanel.addActionListener(listener);
         saveRevertPanel.addActionListener(listener);

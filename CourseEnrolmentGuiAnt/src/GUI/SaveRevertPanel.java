@@ -9,12 +9,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class BottomPanel extends JPanel implements InteractivePanel, DisplayPanel {
-    public JButton revertChangesButton;
-    public JButton confirmAndSaveButton;
-    private JLabel userFullName;
+public class SaveRevertPanel extends JPanel implements InteractivePanel, DisplayPanel {
+    private final JButton revertChangesButton;
+    private final JButton confirmAndSaveButton;
+    private final JLabel userFullName;
     
-    public BottomPanel() {
+    public SaveRevertPanel() {
         setLayout(new FlowLayout(FlowLayout.RIGHT));
         userFullName = new JLabel();
         revertChangesButton = new JButton("Revert Changes");

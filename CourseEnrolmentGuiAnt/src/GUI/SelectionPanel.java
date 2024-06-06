@@ -12,8 +12,8 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
 public class SelectionPanel extends JPanel implements InteractivePanel, DisplayPanel {
-    public JComboBox<String> semesterComboBox;
-    public JComboBox<String> courseComboBox;
+    private final JComboBox<String> semesterComboBox;
+    private final JComboBox<String> courseComboBox;
 
     public SelectionPanel() {
         setLayout(new GridLayout(2, 1));
