@@ -42,6 +42,11 @@ public class DBModel extends Observable {
         //dbManager.closeConnections();
     }
 
+    /**
+     * Attempt to log in a user with the given studentID
+     * Updates View on whether login was successful.
+     * @param studentId Student ID entered by user. Matched to user entry in database.
+     */
     public void login(String studentId) {
         System.out.println("login attempt " + studentId);
         UpdateFlags update = new UpdateFlags();
@@ -116,10 +121,15 @@ public class DBModel extends Observable {
         notifyObservers(flags);
     }
 
+
+    /**
+     * Take the selected enrolment and add it onto the students schedule as a temporary enrolment.
+     * Prompts the view to update schedule.
+     */
     public void addNewEnrolment() {
         if (streamClash) { return; }
         Enrolment newEnrolment = new Enrolment(selectedCourse.getCode(), selectedTimetable);
-        student.tempEnrolments.add(newEnrolment);
+        student.addTempEnrolment(newEnrolment);
         System.out.println(student);
 
         this.setChanged();
@@ -128,17 +138,24 @@ public class DBModel extends Observable {
         notifyObservers(flags);
     }
 
+    /**
+     * Clear the temp enrolments to rollback user changes
+     */
     public void clearTempEnrolments() {
-        student.tempEnrolments.clear();
-        System.out.println(student);
+        try {
+            student.rollbackChanges(dbManager);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         this.setChanged();
         UpdateFlags flags = new UpdateFlags();
         flags.scheduleUpdate=true;
+        flags.courseDropdownUpdate=true;
         notifyObservers(flags);
     }
 
     public void confirmEnrolments() {
-        student.confirmEnrolments(dbManager);
+        student.confirmChanges(dbManager);
         UpdateFlags flags = new UpdateFlags();
         flags.scheduleUpdate = true;
         setChanged();

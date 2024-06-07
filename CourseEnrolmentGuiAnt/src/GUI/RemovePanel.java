@@ -14,8 +14,8 @@ import java.util.List;
 public class RemovePanel extends JPanel implements InteractivePanel, DisplayPanel
 {
 
-    private JComboBox<String> enrolmentComboBox;
-    private JButton removeButton;
+    private final JComboBox<String> enrolmentComboBox;
+    private final JButton removeButton;
 
     public RemovePanel()
     {

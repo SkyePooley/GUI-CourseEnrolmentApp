@@ -47,6 +47,9 @@ public class Controller implements ActionListener {
             case "Add to Schedule":
                 model.addNewEnrolment();
                 break;
+            case "Remove Enrolment":
+
+                break;
             case "Revert Changes":
                 model.clearTempEnrolments();
                 break;

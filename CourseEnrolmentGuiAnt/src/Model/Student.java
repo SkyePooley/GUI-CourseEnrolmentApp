@@ -2,7 +2,6 @@ package Model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -41,16 +40,7 @@ class Student {
             previousEnrolments.add(previousEnrolmentRows.getString("CourseCode"));
         }
 
-        // get current enrolments as enrolment objects
-        ResultSet currentEnrolmentRows = dbManager.query(
-                "SELECT t.*\n " +
-                "FROM CURRENT_ENROLMENT e, TIMETABLE t\n " +
-                "WHERE e.\"StudentId\" = '" + this.getStudentId() + "' \n" +
-                "AND e.\"TimetableId\" = t.\"TimetableID\"");
-        while (currentEnrolmentRows.next()) {
-            Timetable timetable = new Timetable(currentEnrolmentRows);
-            currentEnrolments.add(new Enrolment(currentEnrolmentRows.getString("CourseCode"), timetable));
-        }
+        loadCurrentEnrolments(dbManager);
     }
 
     /**
@@ -71,7 +61,7 @@ class Student {
      * Shift all temporary enrolments into the current enrolments, clear temp enrolments.
      * Save new list of enrolments to the database
      */
-    public void confirmEnrolments(DBManager database) {
+    public void confirmChanges(DBManager database) {
         currentEnrolments.addAll(tempEnrolments);
         tempEnrolments.clear();
         // admin account stays blank
@@ -90,6 +80,25 @@ class Student {
             commands.add("INSERT INTO \"CURRENT_ENROLMENT\" VALUES ('" + studentId + "', '" + enrolment.getCourse() + "', " + enrolment.getTableIndex() + ")");
         }
         database.updateBatch(commands);
+    }
+
+    public void rollbackChanges(DBManager dbManager) throws SQLException {
+        this.tempEnrolments.clear();
+        this.currentEnrolments.clear();
+        this.loadCurrentEnrolments(dbManager);
+    }
+
+    public void loadCurrentEnrolments(DBManager dbManager) throws SQLException {
+        // get current enrolments as enrolment objects
+        ResultSet currentEnrolmentRows = dbManager.query(
+                "SELECT t.*\n " +
+                        "FROM CURRENT_ENROLMENT e, TIMETABLE t\n " +
+                        "WHERE e.\"StudentId\" = '" + this.getStudentId() + "' \n" +
+                        "AND e.\"TimetableId\" = t.\"TimetableID\"");
+        while (currentEnrolmentRows.next()) {
+            Timetable timetable = new Timetable(currentEnrolmentRows);
+            currentEnrolments.add(new Enrolment(currentEnrolmentRows.getString("CourseCode"), timetable));
+        }
     }
 
     /**
