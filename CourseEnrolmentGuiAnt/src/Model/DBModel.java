@@ -26,6 +26,7 @@ public class DBModel extends Observable {
     private int selectedStream;
     private Timetable selectedTimetable;
     public boolean streamClash = false;
+    public String enrolmentToRemove;
     
     public DBModel() {
         this.dbManager = DBManager.getDBManager();
@@ -103,10 +104,6 @@ public class DBModel extends Observable {
         notifyObservers(flags);
     }
 
-    public void updateEnrolmentToRemove(String courseCode) {
-
-    }
-
     /**
      * Check whether the selected stream would cause a schedule clash
      * @param streamIndex Optiom from the stream dropdown menu.
@@ -142,8 +139,13 @@ public class DBModel extends Observable {
         notifyObservers(flags);
     }
 
-    public void removeSelectedEnrolment() {
 
+    public void updateEnrolmentToRemove(String courseCode) {
+        this.enrolmentToRemove = courseCode;
+    }
+
+    public void removeSelectedEnrolment() {
+        student.removeEnrolment(enrolmentToRemove);
 
         this.setChanged();
         UpdateFlags flags = new UpdateFlags();

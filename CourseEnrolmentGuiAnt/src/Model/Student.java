@@ -116,7 +116,14 @@ class Student {
         this.loadCurrentEnrolments(dbManager);
     }
 
+    /**
+     * Removes the enrolment matching the given course code.
+     * @param courseCode Course code matching enrolment.
+     */
     public void removeEnrolment(String courseCode) {
+        if (tempEnrolments.remove(courseCode) != null) { return; }
+        if (currentEnrolments.remove(courseCode) != null) { return; }
+        System.out.println("Attempted to remove an enrolment which does not exist.");
     }
 
     /**
