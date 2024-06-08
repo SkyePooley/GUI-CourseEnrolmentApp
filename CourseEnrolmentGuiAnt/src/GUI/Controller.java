@@ -1,7 +1,6 @@
 package GUI;
 
 import Model.DBModel;
-import GUI.View;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -47,11 +46,14 @@ public class Controller implements ActionListener {
             case "Add to Schedule":
                 model.addNewEnrolment();
                 break;
+            case "Remove Course Selected":
+                model.updateEnrolmentToRemove(getComboOption(event.getSource()));
+                break;
             case "Remove Enrolment":
-
+                model.removeSelectedEnrolment();
                 break;
             case "Revert Changes":
-                model.clearTempEnrolments();
+                model.revertChanges();
                 break;
             case "Confirm and Save":
                 model.confirmEnrolments();

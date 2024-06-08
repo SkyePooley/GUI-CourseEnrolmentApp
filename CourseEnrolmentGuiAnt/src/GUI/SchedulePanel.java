@@ -2,11 +2,11 @@ package GUI;
 
 import Model.CalendarEvent;
 import Model.DBModel;
-import Model.Enrolment;
 import Model.Timetable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
@@ -69,11 +69,9 @@ public class SchedulePanel extends JPanel implements DisplayPanel{
      */
     public void update(DBModel model){
         clearEvents();
-        for (Enrolment enrolment : model.getCurrentSemesterEnrolments()) {
-            addTimetable(enrolment.getCourse(), enrolment.getTimetable());
-        }
-        for (Enrolment enrolment : model.getTempSemesterEnrolments()) {
-            addTimetable("*"+enrolment.getCourse(), enrolment.getTimetable());
+        HashMap<String, Timetable> enrolments = model.getCurrentSemesterEnrolments();
+        for (String courseCode : enrolments.keySet()) {
+            addTimetable(courseCode, enrolments.get(courseCode));
         }
     }
 
