@@ -96,14 +96,6 @@ public class CourseCollectionManager {
         return getCoursesFromQuery("");
     }
 
-    public boolean containsCourse(String code) {
-        return allCourses.containsKey(code);
-    }
-
-    public boolean containsCourse(Course course) {
-        return allCourses.containsValue(course);
-    }
-
     /**
      * Get the course which has this code.
      * @param code 7-digit course code
@@ -117,7 +109,7 @@ public class CourseCollectionManager {
      * Get a list of course codes for which the given student has met all prerequisites.
      * @param student To reference previous enrolments
      * @param semester Filtered by semester
-     * @return LinkedList contaning 7-digit course codes. Returns null on illegal argument, empty list if no eligible courses
+     * @return LinkedList containing 7-digit course codes. Returns null on illegal argument, empty list if no eligible courses
      */
     public LinkedList<String> getEligibleCourseCodes(Student student, int semester) {
         if (semester < 1 || 2 < semester) { return null; }

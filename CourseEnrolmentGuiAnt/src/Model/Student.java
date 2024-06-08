@@ -20,7 +20,7 @@ class Student {
     protected HashMap<String, Timetable> tempEnrolments;
 
     /**
-     * Construct a student from their row in the STUDENT table and a reference to the database
+     * Construct a student from their row in the STUDENT table and a reference to the database.
      * Database reference is used to fetch information on previous and current enrolments.
      * @param studentRow ResultSet containing one row from STUDENT table
      * @param dbManager instance of database manager

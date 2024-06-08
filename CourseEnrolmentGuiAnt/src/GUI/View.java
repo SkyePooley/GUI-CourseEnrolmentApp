@@ -149,7 +149,6 @@ public class View extends JFrame implements Observer {
 
     private void updateEnrolments(DBModel model) {
         schedulePanel.update(model);
-        selectionPanel.update(model);
         removeCoursePanel.update(model);
     }
 }

@@ -106,7 +106,7 @@ public class DBModel extends Observable {
 
     /**
      * Check whether the selected stream would cause a schedule clash
-     * @param streamIndex Optiom from the stream dropdown menu.
+     * @param streamIndex Option from the stream dropdown menu.
      * @author Skye Pooley
      */
     public void updateSelectedStream(int streamIndex) {
@@ -118,7 +118,6 @@ public class DBModel extends Observable {
 
         UpdateFlags flags = new UpdateFlags();
         flags.streamClashUpdate = true;
-        flags.scheduleUpdate = true;
         this.setChanged();
         notifyObservers(flags);
     }
