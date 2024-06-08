@@ -7,6 +7,8 @@ import Model.Timetable;
 
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 /**
  * Displays the student's schedule on the view.
@@ -37,6 +39,20 @@ public class SchedulePanel extends JPanel implements DisplayPanel{
         table.getTableHeader().setReorderingAllowed(false);
         table.setRowSelectionAllowed(false);
         table.getColumnModel().getColumn(0).setPreferredWidth(10);
+
+        // centering and aligning the headers
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        TableColumnModel columnModel = table.getColumnModel();
+
+        for (int i = 0; i < columnModel.getColumnCount(); i++) {
+            columnModel.getColumn(i).setCellRenderer(headerRenderer);
+        }
+
+        // centering and aligning the time colume
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
 
         for (int i=0; i<table.getRowCount(); i++) {
             String value = i+8 + ":00";
