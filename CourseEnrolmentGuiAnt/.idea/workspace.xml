@@ -10,15 +10,12 @@
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/log.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/log.ctrl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/log1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/log1.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/logmirror.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/logmirror.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c560.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c560.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c571.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c571.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c581.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c581.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c591.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c591.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/derby.log" beforeDir="false" afterPath="$PROJECT_DIR$/derby.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/RemovePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/RemovePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/SchedulePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/SchedulePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/DBModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/DBModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Enrolment.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Student.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -157,7 +154,7 @@
       <workItem from="1717626782322" duration="6785000" />
       <workItem from="1717636800849" duration="391000" />
       <workItem from="1717637498288" duration="84000" />
-      <workItem from="1717731929568" duration="5819000" />
+      <workItem from="1717731929568" duration="9464000" />
     </task>
     <servers />
   </component>

@@ -5,6 +5,7 @@
 package Model;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -102,6 +103,10 @@ public class DBModel extends Observable {
         notifyObservers(flags);
     }
 
+    public void updateEnrolmentToRemove(String courseCode) {
+
+    }
+
     /**
      * Check whether the selected stream would cause a schedule clash
      * @param streamIndex Optiom from the stream dropdown menu.
@@ -128,8 +133,7 @@ public class DBModel extends Observable {
      */
     public void addNewEnrolment() {
         if (streamClash) { return; }
-        Enrolment newEnrolment = new Enrolment(selectedCourse.getCode(), selectedTimetable);
-        student.addTempEnrolment(newEnrolment);
+        student.addTempEnrolment(selectedCourse.getCode(), selectedTimetable);
         System.out.println(student);
 
         this.setChanged();
@@ -138,10 +142,19 @@ public class DBModel extends Observable {
         notifyObservers(flags);
     }
 
+    public void removeSelectedEnrolment() {
+
+
+        this.setChanged();
+        UpdateFlags flags = new UpdateFlags();
+        flags.scheduleUpdate=true;
+        notifyObservers(flags);
+    }
+
     /**
-     * Clear the temp enrolments to rollback user changes
+     * Revert all changes made by the user since they loaded in or since they confirmed changes.
      */
-    public void clearTempEnrolments() {
+    public void revertChanges() {
         try {
             student.rollbackChanges(dbManager);
         } catch (SQLException e) {
@@ -166,28 +179,8 @@ public class DBModel extends Observable {
      * Return the students current enrolments from the selected semester.
      * @return HashSet containing enrolments
      */
-    public HashSet<Enrolment> getCurrentSemesterEnrolments() {
-        HashSet<Enrolment> enrolments = new HashSet<>(student.getCurrentEnrolments().size());
-        for (Enrolment enrolment : student.getCurrentEnrolments()) {
-            if (enrolment.getSemester() == this.selectedSemester) {
-                enrolments.add(enrolment);
-            }
-        }
-        return enrolments;
-    }
-
-    /**
-     * Return the student's temporary enrolments from selected semester.
-     * @return
-     */
-    public HashSet<Enrolment> getTempSemesterEnrolments() {
-        HashSet<Enrolment> enrolments = new HashSet<>(student.getTempEnrolments().size());
-        for (Enrolment enrolment : student.getTempEnrolments()) {
-            if (enrolment.getSemester() == this.selectedSemester) {
-                enrolments.add(enrolment);
-            }
-        }
-        return enrolments;
+    public HashMap<String, Timetable> getCurrentSemesterEnrolments() {
+        return student.getEnrolmentsBySemester(selectedSemester);
     }
 
     public Course getSelectedCourse() {

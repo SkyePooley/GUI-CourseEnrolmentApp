@@ -2,6 +2,7 @@ package Model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -15,8 +16,8 @@ class Student {
     private final String firstName;
     private final String lastName;
     protected HashSet<String> previousEnrolments;
-    protected HashSet<Enrolment> currentEnrolments;
-    protected HashSet<Enrolment> tempEnrolments;
+    protected HashMap<String, Timetable> currentEnrolments;
+    protected HashMap<String, Timetable> tempEnrolments;
 
     /**
      * Construct a student from their row in the STUDENT table and a reference to the database
@@ -30,17 +31,36 @@ class Student {
         this.studentId = studentRow.getString("StudentId");
         this.firstName = studentRow.getString("FirstName");
         this.lastName  = studentRow.getString("LastName");
-        this.tempEnrolments     = new HashSet<>(4);
+        this.tempEnrolments     = new HashMap<>(8);
         this.previousEnrolments = new HashSet<>(20);
-        this.currentEnrolments  = new HashSet<>(8);
+        this.currentEnrolments  = new HashMap<>(8);
 
         // get previous enrolments as course code strings
-        ResultSet previousEnrolmentRows = dbManager.query("SELECT * FROM PAST_ENROLMENT WHERE \"StudentId\" = '" + this.getStudentId() + "'");
+        ResultSet previousEnrolmentRows = dbManager.query("SELECT * FROM PAST_ENROLMENT WHERE \"StudentId\" = '" + studentId + "'");
         while (previousEnrolmentRows.next()) {
             previousEnrolments.add(previousEnrolmentRows.getString("CourseCode"));
         }
 
         loadCurrentEnrolments(dbManager);
+    }
+
+    /**
+     * Read in the student's confirmed enrolments from the database.
+     * @param dbManager Connection to database
+     * @throws SQLException Error while reading in enrolments.
+     */
+    public void loadCurrentEnrolments(DBManager dbManager) throws SQLException {
+        // get current enrolments as enrolment objects
+        ResultSet currentEnrolmentRows = dbManager.query(
+                "SELECT t.*\n " +
+                        "FROM CURRENT_ENROLMENT e, TIMETABLE t\n " +
+                        "WHERE e.\"StudentId\" = '" + studentId + "' \n" +
+                        "AND e.\"TimetableId\" = t.\"TimetableID\"");
+        while (currentEnrolmentRows.next()) {
+            Timetable timetable = new Timetable(currentEnrolmentRows);
+            String courseCode = currentEnrolmentRows.getString("CourseCode");
+            currentEnrolments.put(courseCode, timetable);
+        }
     }
 
     /**
@@ -62,7 +82,10 @@ class Student {
      * Save new list of enrolments to the database
      */
     public void confirmChanges(DBManager database) {
-        currentEnrolments.addAll(tempEnrolments);
+        for (String courseCode : tempEnrolments.keySet()) {
+            currentEnrolments.put(courseCode, tempEnrolments.get(courseCode));
+        }
+
         tempEnrolments.clear();
         // admin account stays blank
         if (!studentId.equals("admin"))
@@ -76,29 +99,24 @@ class Student {
     private void saveEnrolments(DBManager database) {
         database.update("DELETE FROM \"CURRENT_ENROLMENT\" WHERE \"StudentId\" = '" + studentId + "'");
         LinkedList<String> commands = new LinkedList<>();
-        for (Enrolment enrolment : currentEnrolments) {
-            commands.add("INSERT INTO \"CURRENT_ENROLMENT\" VALUES ('" + studentId + "', '" + enrolment.getCourse() + "', " + enrolment.getTableIndex() + ")");
+        for (String courseCode : currentEnrolments.keySet()) {
+            commands.add("INSERT INTO \"CURRENT_ENROLMENT\" VALUES ('" + studentId + "', '" + courseCode + "', " + currentEnrolments.get(courseCode).tableIndex + ")");
         }
         database.updateBatch(commands);
     }
 
+    /**
+     * Rollback all changes made by the user in this session.
+     * @param dbManager Database connection to reload confirmed enrolments.
+     * @throws SQLException Error while reading in enrolments.
+     */
     public void rollbackChanges(DBManager dbManager) throws SQLException {
         this.tempEnrolments.clear();
         this.currentEnrolments.clear();
         this.loadCurrentEnrolments(dbManager);
     }
 
-    public void loadCurrentEnrolments(DBManager dbManager) throws SQLException {
-        // get current enrolments as enrolment objects
-        ResultSet currentEnrolmentRows = dbManager.query(
-                "SELECT t.*\n " +
-                        "FROM CURRENT_ENROLMENT e, TIMETABLE t\n " +
-                        "WHERE e.\"StudentId\" = '" + this.getStudentId() + "' \n" +
-                        "AND e.\"TimetableId\" = t.\"TimetableID\"");
-        while (currentEnrolmentRows.next()) {
-            Timetable timetable = new Timetable(currentEnrolmentRows);
-            currentEnrolments.add(new Enrolment(currentEnrolmentRows.getString("CourseCode"), timetable));
-        }
+    public void removeEnrolment(String courseCode) {
     }
 
     /**
@@ -107,18 +125,18 @@ class Student {
      */
     @Override
     public String toString() {
-        String output = this.getFirstName() + " " + this.getLastName() + " " + this.getStudentId();
+        String output = firstName + " " + lastName + " " + studentId;
         output += "\nPrevious Enrolments:";
         for (String prevEnrolment : previousEnrolments) {
             output += "\n" + prevEnrolment;
         }
         output += "\nCurrent Enrolments:\n";
-        for (Enrolment currentEnrolment : currentEnrolments) {
-            output += currentEnrolment.toString();
+        for (String courseCode : currentEnrolments.keySet()) {
+            output += courseCode;
         }
         output += "\nTemp Enrolments:\n";
-        for (Enrolment tempEnrolmenr : tempEnrolments) {
-            output += tempEnrolmenr.toString();
+        for (String courseCode : tempEnrolments.keySet()) {
+            output += courseCode;
         }
 
         return output;
@@ -131,17 +149,24 @@ class Student {
      * @author Skye Pooley
      */
     public boolean checkForClash(Timetable timetable) {
-        for (Enrolment enrolment : currentEnrolments) {
-            if (enrolment.getSemester() == timetable.getSemester())
-                if (enrolment.getTimetable().checkForClash(timetable))
+        // Loop through the existing enrolments and check whether any of their timetables conflict with the new timetable
+        for (String courseCode : currentEnrolments.keySet()) {
+            Timetable existingTimetable = currentEnrolments.get(courseCode);
+            if (existingTimetable.getSemester() == timetable.getSemester())
+                if (existingTimetable.checkForClash(timetable))
                     return true;
         }
-        for (Enrolment enrolment : tempEnrolments) {
-            if (enrolment.getSemester() == timetable.getSemester())
-                if (enrolment.getTimetable().checkForClash(timetable))
+        for (String courseCode : tempEnrolments.keySet()) {
+            Timetable existingTimetable = tempEnrolments.get(courseCode);
+            if (existingTimetable.getSemester() == timetable.getSemester())
+                if (existingTimetable.checkForClash(timetable))
                     return true;
         }
         return false;
+    }
+
+    public void addTempEnrolment(String courseCode, Timetable timetable) {
+        this.tempEnrolments.put(courseCode, timetable);
     }
 
     /**
@@ -149,34 +174,38 @@ class Student {
      * @return First plus last name
      */
     public String getFullName() {
-        return this.getFirstName() + " " + this.getLastName();
+        return firstName + " " + lastName;
     }
 
-    public String getStudentId() {
-        return studentId;
+    private HashMap<String, Timetable> getAllEnrolments() {
+        HashMap<String, Timetable> collatedEnrolments = new HashMap<>();
+
+        for (String courseCode : currentEnrolments.keySet()) {
+            collatedEnrolments.put(courseCode, currentEnrolments.get(courseCode));
+        }
+        for (String courseCode : tempEnrolments.keySet()) {
+            collatedEnrolments.put(courseCode, tempEnrolments.get(courseCode));
+        }
+
+        return collatedEnrolments;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    /**
+     * Get all the student's enrolments which have timetables in the given semester.
+     * @param semester int 1 or 2
+     * @return Mapping of course codes to timetables representing enrolments, or null if semester is invalid.
+     */
+    public HashMap<String, Timetable> getEnrolmentsBySemester(int semester) {
+        if (semester < 1 || semester > 2) { return null; }
+        HashMap<String, Timetable> allEnrolments = this.getAllEnrolments();
+        HashMap<String, Timetable> filteredEnrolments = new HashMap<>();
 
-    public String getLastName() {
-        return lastName;
-    }
+        for (String courseCode : allEnrolments.keySet()) {
+            Timetable timetable = allEnrolments.get(courseCode);
+            if (timetable.getSemester() == semester)
+                filteredEnrolments.put(courseCode, timetable);
+        }
 
-    public boolean addTempEnrolment(Enrolment newEnrolment) {
-        return this.tempEnrolments.add(newEnrolment);
-    }
-
-    public boolean removeTempEnrolment(Enrolment enrolment) {
-        return this.tempEnrolments.remove(enrolment);
-    }
-
-    public HashSet<Enrolment> getCurrentEnrolments() {
-        return this.currentEnrolments;
-    }
-
-    public HashSet<Enrolment> getTempEnrolments() {
-        return this.tempEnrolments;
+        return filteredEnrolments;
     }
 }
