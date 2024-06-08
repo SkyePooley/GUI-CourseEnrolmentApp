@@ -18,8 +18,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class View extends JFrame implements Observer {
-    private final double defaultScreenPortionW = 0.4;
-    private final double defaultScreenPortionH = 0.5;
+    private final double defaultScreenPortionW = 0.8;
+    private final double defaultScreenPortionH = 0.8;
 
     // keep references to panels here
     private final RemovePanel removeCoursePanel;
@@ -46,15 +46,19 @@ public class View extends JFrame implements Observer {
         //Components for adding new enrolments
         this.addCoursePanel = new JPanel();
         addCoursePanel.setLayout(new BoxLayout(addCoursePanel, BoxLayout.Y_AXIS));
+        addCoursePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         this.selectionPanel = new SelectionPanel();
         this.courseDescriptionPanel = new CourseDescriptionPanel();
         this.streamSelectionPanel = new StreamSelectionPanel();
         addCoursePanel.add(selectionPanel);
         addCoursePanel.add(courseDescriptionPanel);
         addCoursePanel.add(streamSelectionPanel);
+        addCoursePanel.add(Box.createVerticalStrut(10));
+        addCoursePanel.add(Box.createVerticalStrut(10));
 
         // Components for removing enrolments
         this.removeCoursePanel = new RemovePanel();
+        this.removeCoursePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Tabs to switch between adding and removing enrolments
         tabbedPane = new JTabbedPane();
@@ -68,6 +72,7 @@ public class View extends JFrame implements Observer {
 
         // Buttons to either revert changes or save to db
         saveRevertPanel = new SaveRevertPanel();
+        saveRevertPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(saveRevertPanel, BorderLayout.SOUTH);
 
         this.loginPopup = new LoginView(this);
