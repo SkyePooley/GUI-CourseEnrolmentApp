@@ -6,6 +6,7 @@ import Model.Timetable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -15,13 +16,24 @@ import javax.swing.table.TableColumnModel;
  * Makes used of a JTable to display the schedule on a grid
  * @author Skye Pooley
  */
-public class SchedulePanel extends JPanel implements DisplayPanel{
+public class SchedulePanel extends JPanel implements DisplayPanel, InteractivePanel{
+    private final JPanel semesterPanel;
+    private final JComboBox<String> semesterComboBox;
     private final JTable scheduleTable;
 
     public SchedulePanel() {
         BorderLayout layout = new BorderLayout(5, 5);
         this.setLayout(layout);
 
+        semesterPanel = new JPanel();
+        semesterPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JLabel semesterLabel = new JLabel("Select Semester");
+        semesterComboBox = new JComboBox<>(new String[]{"1", "2"});
+        semesterComboBox.setActionCommand("Semester Selected");
+        semesterPanel.add(semesterLabel);
+        semesterPanel.add(semesterComboBox);
+
+        add(semesterPanel, BorderLayout.NORTH);
         scheduleTable = tableSetup();
         add(new JScrollPane(scheduleTable), BorderLayout.CENTER);
     }
@@ -39,6 +51,7 @@ public class SchedulePanel extends JPanel implements DisplayPanel{
         table.getTableHeader().setReorderingAllowed(false);
         table.setRowSelectionAllowed(false);
         table.getColumnModel().getColumn(0).setPreferredWidth(10);
+        table.setGridColor(Color.lightGray);
 
         // centering and aligning the headers
         DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
@@ -73,6 +86,10 @@ public class SchedulePanel extends JPanel implements DisplayPanel{
         for (String courseCode : enrolments.keySet()) {
             addTimetable(courseCode, enrolments.get(courseCode));
         }
+    }
+
+    public void addActionListener(ActionListener l) {
+        semesterComboBox.addActionListener(l);
     }
 
     /**

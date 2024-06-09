@@ -13,14 +13,11 @@ import java.util.HashMap;
 
 public class RemovePanel extends JPanel implements InteractivePanel, DisplayPanel
 {
-
     private final JComboBox<String> enrolmentComboBox;
     private final JButton removeButton;
 
     public RemovePanel()
     {
-        setLayout(new FlowLayout(FlowLayout.LEFT));
-
         JLabel enrolmentLabel = new JLabel("Select Enrolment to remove");
         enrolmentComboBox = new JComboBox<>();
         enrolmentComboBox.setActionCommand("Remove Course Selected");
@@ -29,6 +26,8 @@ public class RemovePanel extends JPanel implements InteractivePanel, DisplayPane
         add(enrolmentLabel);
         add(enrolmentComboBox);
         add(removeButton);
+
+        this.setLayout(new FlowLayout(FlowLayout.LEFT));
     }
 
     @Override
