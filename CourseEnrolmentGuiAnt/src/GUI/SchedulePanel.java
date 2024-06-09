@@ -14,7 +14,7 @@ import javax.swing.table.TableColumnModel;
 /**
  * Displays the student's schedule on the view.
  * Makes used of a JTable to display the schedule on a grid
- * @author Skye Pooley
+ * @author Skye Pooley and Clayton Roberts
  */
 public class SchedulePanel extends JPanel implements DisplayPanel, InteractivePanel{
     private final JPanel semesterPanel;

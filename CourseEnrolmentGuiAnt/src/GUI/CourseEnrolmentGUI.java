@@ -1,4 +1,5 @@
 /**
+ * Application for students to add and remove enrolments from their schedules.
  * @author Skye Pooley & Clayton Roberts
  */
 package GUI;
@@ -21,7 +22,6 @@ public class CourseEnrolmentGUI {
         Controller controller = new Controller();
         controller.addModel(model);
         controller.addView(mainWindow);
-        controller.initModel();
 
         mainWindow.openLoginPopup();
     }

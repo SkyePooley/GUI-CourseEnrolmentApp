@@ -21,7 +21,8 @@ public class RemovePanel extends JPanel implements InteractivePanel, DisplayPane
         JLabel enrolmentLabel = new JLabel("Select Enrolment to remove");
         enrolmentComboBox = new JComboBox<>();
         enrolmentComboBox.setActionCommand("Remove Course Selected");
-        removeButton = new JButton("Remove Enrolment");
+        removeButton = new JButton("Remove");
+        removeButton.setActionCommand("Remove Enrolment");
 
         add(enrolmentLabel);
         add(enrolmentComboBox);

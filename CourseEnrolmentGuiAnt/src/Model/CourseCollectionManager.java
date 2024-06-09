@@ -146,14 +146,4 @@ public class CourseCollectionManager {
         }
         return output.toString();
     }
-
-    public HashMap<String, Course> getSemOneCourses() {
-        return semOneCourses;
-    }
-
-    public HashMap<String, Course> getSemTwoCourses() {
-        return semTwoCourses;
-    }
-
-    // TODO get eligible courses
 }

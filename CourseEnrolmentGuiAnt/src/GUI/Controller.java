@@ -7,7 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * Translation layer between the View and Model.
+ * Catches ActionEvents from the View and calls corresponding method in model.
  * @author Skye Pooley & Clayton Roberts
  */
 public class Controller implements ActionListener {
@@ -59,7 +60,7 @@ public class Controller implements ActionListener {
                 model.confirmEnrolments();
                 break;
             default:
-                System.out.println("an unrecognised actionEvent was captured");
+                System.out.println("Captured ActionEvent has no corresponding method in model. Unfinished feature?");
         }
     }
 
@@ -84,9 +85,5 @@ public class Controller implements ActionListener {
         this.view = view;
         view.addActionListener(this);
         System.out.println("View added to controller");
-    }
-
-    public void initModel() {
-        // set up some initial value in the model
     }
 }

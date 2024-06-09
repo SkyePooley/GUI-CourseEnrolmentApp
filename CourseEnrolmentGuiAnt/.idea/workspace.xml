@@ -4,18 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24a38822-ca8c-4f2f-879b-c2d0954acfa2" name="Changes" comment="">
+    <list default="true" id="038d5a86-2683-44ec-b7c6-a838bea5de1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/db.lck" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/db.lck" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/log.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/log.ctrl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/log1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/log1.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/logmirror.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/logmirror.ctrl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c500.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c500.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c511.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c511.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c520.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c520.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c531.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c531.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c541.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c541.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c551.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c551.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c560.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c560.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c571.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c571.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c581.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c581.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c591.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c591.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/derby.log" beforeDir="false" afterPath="$PROJECT_DIR$/derby.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/CourseEnrolmentGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/CourseEnrolmentGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/RemovePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/RemovePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/SchedulePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/SchedulePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/CourseCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/CourseCollectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/DBModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/DBModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Student.java" afterDir="false" />
@@ -25,175 +34,30 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-        <option value="Interface" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
-}</component>
-  <component name="ProjectId" id="2gqFfAD98oqQ2gHttvJSd02Xf1W" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.CourseEnrolmentGUI.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/wmpoo/OneDrive - AUT University/Classes/PDC/PDC_Tutorial9_Solutions",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\wmpoo\OneDrive - AUT University\Classes\PDC\Project 2\CourseEnrolmentGuiAnt\src\GUI" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.CourseEnrolmentGUI">
-    <configuration name="CourseEnrolmentGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="Course Enrolment Application" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="GUI.CourseEnrolmentGUI" />
       <module name="CourseEnrolmentGuiAnt" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="GUI.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CourseScheduler" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GUI.CourseScheduler" />
-      <module name="CourseEnrolmentGuiAnt" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="GUI.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DBManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Model.DBManager" />
-      <module name="CourseEnrolmentGuiAnt" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DBModel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Model.DBModel" />
-      <module name="CourseEnrolmentGuiAnt" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.CourseEnrolmentGUI" />
-        <item itemvalue="Application.DBModel" />
-        <item itemvalue="Application.CourseScheduler" />
-        <item itemvalue="Application.DBManager" />
-      </list>
-    </recent_temporary>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-11.0.21-corretto-11.0.21-4caba194b151-b24ef850" />
-      </set>
-    </attachedChunks>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="24a38822-ca8c-4f2f-879b-c2d0954acfa2" name="Changes" comment="" />
-      <created>1716417301930</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1716417301930</updated>
-      <workItem from="1716417302976" duration="11037000" />
-      <workItem from="1716432053624" duration="6487000" />
-      <workItem from="1716607406468" duration="5542000" />
-      <workItem from="1716713822536" duration="864000" />
-      <workItem from="1716770941476" duration="26000" />
-      <workItem from="1716885716096" duration="3817000" />
-      <workItem from="1716940178699" duration="9760000" />
-      <workItem from="1717042282671" duration="203000" />
-      <workItem from="1717042497930" duration="125000" />
-      <workItem from="1717042697449" duration="4994000" />
-      <workItem from="1717313827946" duration="33000" />
-      <workItem from="1717371504725" duration="20693000" />
-      <workItem from="1717477342197" duration="9999000" />
-      <workItem from="1717542231767" duration="14875000" />
-      <workItem from="1717626782322" duration="6785000" />
-      <workItem from="1717636800849" duration="391000" />
-      <workItem from="1717637498288" duration="84000" />
-      <workItem from="1717731929568" duration="9464000" />
-    </task>
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.NullPointerException" package="java.lang" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.NumberFormatException" package="java.lang" />
-          <option name="timeStamp" value="2" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
