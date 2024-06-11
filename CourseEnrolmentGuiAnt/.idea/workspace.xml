@@ -5,32 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="038d5a86-2683-44ec-b7c6-a838bea5de1c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/hamcrest-core-1.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hamcrest/hamcrest-core-1.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/junit-4.13.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/junit_4/junit-4.13.2-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/junit_4/junit-4.13.2-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/junit_4/junit-4.13.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/Model/CourseCollectionManagerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/Model/StudentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CourseEnrolmentGuiAnt.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CourseEnrolmentGuiAnt.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/db.lck" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/db.lck" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/log.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/log.ctrl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/log1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/log1.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/logmirror.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/logmirror.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c560.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c560.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c571.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c571.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c581.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c581.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c591.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c591.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/derby.log" beforeDir="false" afterPath="$PROJECT_DIR$/derby.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/nblibraries.properties" beforeDir="false" afterPath="$PROJECT_DIR$/lib/nblibraries.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/SchedulePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/SchedulePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/CourseCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/CourseCollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Student.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,28 +37,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Course Enrolment Application.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
