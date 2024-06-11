@@ -50,7 +50,7 @@ public class SchedulePanel extends JPanel implements DisplayPanel, InteractivePa
         table.setRowHeight(30);
         table.getTableHeader().setReorderingAllowed(false);
         table.setRowSelectionAllowed(false);
-        table.getColumnModel().getColumn(0).setPreferredWidth(10);
+        table.getColumnModel().getColumn(0).setPreferredWidth(8);
         table.setGridColor(Color.lightGray);
 
         // centering and aligning the headers

@@ -18,8 +18,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class View extends JFrame implements Observer {
-    private final double defaultScreenPortionW = 0.8;
-    private final double defaultScreenPortionH = 0.8;
+    private final double defaultScreenPortionW = 0.7;
+    private final double defaultScreenPortionH = 0.7;
 
     // keep references to panels here
     private final RemovePanel removeCoursePanel;

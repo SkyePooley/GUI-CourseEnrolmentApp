@@ -63,7 +63,7 @@ class Student {
      * @param dbManager Connection to database
      * @throws SQLException Error while reading in enrolments.
      */
-    public void loadCurrentEnrolments(DBManager dbManager) throws SQLException {
+    private void loadCurrentEnrolments(DBManager dbManager) throws SQLException {
         // get current enrolments as enrolment objects
         ResultSet currentEnrolmentRows = dbManager.query(
                 "SELECT t.*\n " +
