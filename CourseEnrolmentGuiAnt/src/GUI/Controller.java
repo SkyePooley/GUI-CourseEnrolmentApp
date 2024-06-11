@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
  * @author Skye Pooley & Clayton Roberts
  */
 public class Controller implements ActionListener {

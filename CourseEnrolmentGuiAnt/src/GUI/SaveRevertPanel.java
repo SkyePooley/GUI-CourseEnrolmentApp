@@ -13,7 +13,10 @@ public class SaveRevertPanel extends JPanel implements InteractivePanel, Display
     private final JButton revertChangesButton;
     private final JButton confirmAndSaveButton;
     private final JLabel userFullName;
-    
+
+    /**
+     * 
+     */
     public SaveRevertPanel() {
         setLayout(new FlowLayout(FlowLayout.RIGHT));
         userFullName = new JLabel();

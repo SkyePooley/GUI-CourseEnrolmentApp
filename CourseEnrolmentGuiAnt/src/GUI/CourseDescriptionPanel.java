@@ -1,5 +1,5 @@
 /**
- * @author Clayton
+ * @author Clayton Roberts
  */
 package GUI;
 
@@ -13,6 +13,10 @@ public class CourseDescriptionPanel extends JPanel implements DisplayPanel{
     private JLabel title;
     private JTextArea courseDescriptionArea;
 
+    /**
+     * The CourseDescriptionPanel class creates a user interface component for displaying descriptions
+     * @author Clayton Roberts
+     */
     public CourseDescriptionPanel() {
         setLayout(new BorderLayout());
         title = new JLabel("Selected Course");

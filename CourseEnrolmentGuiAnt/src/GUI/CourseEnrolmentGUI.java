@@ -8,6 +8,10 @@ import Model.DBModel;
 public class CourseEnrolmentGUI {
     DBModel model;
 
+    /**
+     * Main to make our GUI run and execute
+     * @author Clayton Roberts
+     */
     public static void main(String[] args) {
         CourseEnrolmentGUI gui = new CourseEnrolmentGUI();
     }
