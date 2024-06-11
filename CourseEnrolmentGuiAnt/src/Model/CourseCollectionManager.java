@@ -22,7 +22,7 @@ public class CourseCollectionManager {
      */
     public CourseCollectionManager(DBManager dbManager) {
         this.dbManager = dbManager;
-        this.allCourses = getAllCourses();
+        allCourses = getAllCourses();
         semOneCourses = new HashMap<>(allCourses.size());
         semTwoCourses = new HashMap<>(allCourses.size());
 
@@ -107,7 +107,7 @@ public class CourseCollectionManager {
 
     /**
      * Get a list of course codes for which the given student has met all prerequisites.
-     * @param student To reference previous enrolments
+     * @param student To reference previous enrollments
      * @param semester Filtered by semester
      * @return LinkedList containing 7-digit course codes. Returns null on illegal argument, empty list if no eligible courses
      */
@@ -146,14 +146,4 @@ public class CourseCollectionManager {
         }
         return output.toString();
     }
-
-    public HashMap<String, Course> getSemOneCourses() {
-        return semOneCourses;
-    }
-
-    public HashMap<String, Course> getSemTwoCourses() {
-        return semTwoCourses;
-    }
-
-    // TODO get eligible courses
 }

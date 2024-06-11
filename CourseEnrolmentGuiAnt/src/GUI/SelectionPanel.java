@@ -12,17 +12,10 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
 public class SelectionPanel extends JPanel implements InteractivePanel, DisplayPanel {
-    private final JComboBox<String> semesterComboBox;
     private final JComboBox<String> courseComboBox;
 
     public SelectionPanel() {
         setLayout(new GridLayout(2, 1));
-        JPanel semesterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel semesterLabel = new JLabel("Select Semester");
-        semesterComboBox = new JComboBox<String>(new String[]{"1", "2"});
-        semesterComboBox.setActionCommand("Semester Selected");
-        semesterPanel.add(semesterLabel);
-        semesterPanel.add(semesterComboBox);
 
         JPanel coursePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel courseLabel = new JLabel("Select Course");
@@ -31,13 +24,11 @@ public class SelectionPanel extends JPanel implements InteractivePanel, DisplayP
         coursePanel.add(courseLabel);
         coursePanel.add(courseComboBox);
 
-        add(semesterPanel);
         add(coursePanel);
     }
 
     @Override
     public void addActionListener(ActionListener listener) {
-        semesterComboBox.addActionListener(listener);
         courseComboBox.addActionListener(listener);
     }
 

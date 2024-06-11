@@ -6,17 +6,16 @@ package Model;
 
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Observable;
 
 /**
- *
+ * Manages all data held by the application and provides methods for the controller to manipulate this data.
  * @author Skye Pooley
  */
 public class DBModel extends Observable {
-    private DBManager dbManager;
-    private CourseCollectionManager courses;
+    private final DBManager dbManager;
+    private final CourseCollectionManager courses;
     private Student student;
 
     // info for the view
@@ -31,23 +30,13 @@ public class DBModel extends Observable {
     public DBModel() {
         this.dbManager = DBManager.getDBManager();
         courses = new CourseCollectionManager(dbManager);
-        this.login("22179237");
-    }
-    
-    public static void main(String[] args) {
-        DBModel model = new DBModel();
-        System.out.println(model.courses);
-
-        model.login("22179237");
-        System.out.println(model.student);
-
-        //dbManager.closeConnections();
     }
 
     /**
      * Attempt to log in a user with the given studentID
      * Updates View on whether login was successful.
-     * @param studentId Student ID entered by user. Matched to user entry in database.
+     * @param studentId Student ID entered by user. Matched to user entry in database. Limited to 8 char length.
+     * @author Skye Pooley
      */
     public void login(String studentId) {
         System.out.println("login attempt " + studentId);
@@ -69,19 +58,22 @@ public class DBModel extends Observable {
             System.out.println("Something went wrong while looking up student login with ID " + studentId);
             e.printStackTrace();
         }
-        System.out.println(student);
     }
 
     /**
-     * Called when a semester is selected on the GUI
-     * Updates which courses are available based on semester timetables
+     * Called when a semester is selected on the GUI or a user logs in.
+     * Updates which courses are available based on semester timetables and prerequisites met by student.
      * @param semester Integer value 1 or 2
+     * @author Skye Pooley
+     * @see Student
+     * @see GUI.SchedulePanel
      */
     public void updateEligibleCourses(int semester) {
         this.selectedSemester = semester;
         this.eligibleCourseCodes = courses.getEligibleCourseCodes(student, selectedSemester);
         UpdateFlags flags = new UpdateFlags();
         flags.courseDropdownUpdate = true;
+        flags.scheduleUpdate = true;
         this.setChanged();
         notifyObservers(flags);
     }
@@ -90,6 +82,9 @@ public class DBModel extends Observable {
      * Called from the controller when a course is selected from the gui dropdown menu
      * Selects this course in the model and provides details to the view
      * @param courseCode 7-digit code corresponding to course object
+     * @see GUI.SelectionPanel
+     * @see Course
+     * @see CourseCollectionManager
      */
     public void updateSelectedCourse(String courseCode) {
         this.selectedCourse = courses.getCourse(courseCode);
@@ -108,6 +103,7 @@ public class DBModel extends Observable {
      * Check whether the selected stream would cause a schedule clash
      * @param streamIndex Option from the stream dropdown menu.
      * @author Skye Pooley
+     * @see Timetable
      */
     public void updateSelectedStream(int streamIndex) {
         selectedStream = streamIndex-1; // menu starts at one, data structure starts at zero
@@ -126,6 +122,10 @@ public class DBModel extends Observable {
     /**
      * Take the selected enrolment and add it onto the students schedule as a temporary enrolment.
      * Prompts the view to update schedule.
+     * @author Skye Pooley
+     * @see GUI.SelectionPanel
+     * @see GUI.StreamSelectionPanel
+     * @see Student
      */
     public void addNewEnrolment() {
         if (streamClash) { return; }
@@ -139,10 +139,24 @@ public class DBModel extends Observable {
     }
 
 
+    /**
+     * Updated the model on which course code is selected in the enrolment removal dropdown menu.
+     * @param courseCode Course code read from enrolment removal dropdown.
+     * @author Skye Pooley
+     * @see GUI.RemovePanel
+     */
     public void updateEnrolmentToRemove(String courseCode) {
         this.enrolmentToRemove = courseCode;
     }
 
+    /**
+     * Removes enrolment matching the option selected in the enrolment removal dropdown menu.
+     * Depends on updates from updateEnrolmentToRemove()
+     * Prompts update to schedule view.
+     * @author Skye Pooley
+     * @see GUI.RemovePanel
+     * @see Student
+     */
     public void removeSelectedEnrolment() {
         student.removeEnrolment(enrolmentToRemove);
 
@@ -154,6 +168,10 @@ public class DBModel extends Observable {
 
     /**
      * Revert all changes made by the user since they loaded in or since they confirmed changes.
+     * Deletes all temporary enrolments and reloads student data from the database.
+     * @author Skye Pooley
+     * @see GUI.SaveRevertPanel
+     * @see Student
      */
     public void revertChanges() {
         try {
@@ -168,6 +186,13 @@ public class DBModel extends Observable {
         notifyObservers(flags);
     }
 
+    /**
+     * Save enrolment changes to the database.
+     * Prompts schedule update.
+     * @author Skye Pooley
+     * @see GUI.SaveRevertPanel
+     * @see Model.Student
+     */
     public void confirmEnrolments() {
         student.confirmChanges(dbManager);
         UpdateFlags flags = new UpdateFlags();
@@ -179,11 +204,18 @@ public class DBModel extends Observable {
     /**
      * Return the students current enrolments from the selected semester.
      * @return HashSet containing enrolments
+     * @see GUI.SchedulePanel
+     * @see GUI.RemovePanel
      */
     public HashMap<String, Timetable> getCurrentSemesterEnrolments() {
         return student.getEnrolmentsBySemester(selectedSemester);
     }
 
+    /**
+     * Get the course object matching the course selected in the enrolment add menu.
+     * @return Course object containing description and timetables of chosen course
+     * @see GUI.CourseDescriptionPanel
+     */
     public Course getSelectedCourse() {
         return this.selectedCourse;
     }
@@ -191,6 +223,7 @@ public class DBModel extends Observable {
     /**
      * Get the number of streams available for this course in this semester
      * @return int number of streams
+     * @see GUI.StreamSelectionPanel
      */
     public int getNumberOfStreams() {
         if (selectedSemester == 1) {
@@ -199,6 +232,11 @@ public class DBModel extends Observable {
         return selectedCourse.getSemTwoTimetables().size();
     }
 
+    /**
+     * Get name of user.
+     * @return First and Last name of logged-in user separated by space.
+     * @see GUI.SaveRevertPanel
+     */
     public String getUserFullName() {
         return student.getFullName();
     }

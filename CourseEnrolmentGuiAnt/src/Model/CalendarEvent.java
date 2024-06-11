@@ -9,6 +9,7 @@ import java.util.Locale;
  * Includes a day of the week, starting hour, and duration.
  * Intended to be used for events which repeat each week for a full semester.
  * @author Skye Pooley
+ * @see Timetable
  */
 public class CalendarEvent {
     private final DayOfWeek eventDay;
@@ -62,10 +63,6 @@ public class CalendarEvent {
         // does the ending of the given event fall inside this event
         boolean endClash   = (event.getEndHour() >= this.eventHour   && event.getEndHour() <= this.getEndHour());
         return startClash || endClash;
-    }
-
-    public int getEventDuration() {
-        return eventDuration;
     }
 
     public int getEventHour() {

@@ -20,6 +20,20 @@ class Student {
     protected HashMap<String, Timetable> tempEnrolments;
 
     /**
+     * Get a student object from a student ID and reference to the database.
+     * Checks that the student exists on record and returns null if not.
+     * @param studentId String 8 characters long
+     * @param dbManager Ref to database manager
+     * @return Student if exists, null otherwise
+     * @throws SQLException This really shouldn't happen, what did you do? Maybe the ID was in the wrong format.
+     */
+    public static Student getStudent(String studentId, DBManager dbManager) throws SQLException {
+        ResultSet studentRow = dbManager.query("SELECT * FROM STUDENT WHERE \"StudentId\" = '" + studentId + "'");
+        if (!studentRow.next()) { return null; }
+        return new Student(studentRow, dbManager);
+    }
+
+    /**
      * Construct a student from their row in the STUDENT table and a reference to the database.
      * Database reference is used to fetch information on previous and current enrolments.
      * @param studentRow ResultSet containing one row from STUDENT table
@@ -49,7 +63,7 @@ class Student {
      * @param dbManager Connection to database
      * @throws SQLException Error while reading in enrolments.
      */
-    public void loadCurrentEnrolments(DBManager dbManager) throws SQLException {
+    private void loadCurrentEnrolments(DBManager dbManager) throws SQLException {
         // get current enrolments as enrolment objects
         ResultSet currentEnrolmentRows = dbManager.query(
                 "SELECT t.*\n " +
@@ -61,20 +75,6 @@ class Student {
             String courseCode = currentEnrolmentRows.getString("CourseCode");
             currentEnrolments.put(courseCode, timetable);
         }
-    }
-
-    /**
-     * Get a student object from a student ID and reference to the database.
-     * Checks that the student exists on record and returns null if not.
-     * @param studentId String 8 characters long
-     * @param dbManager Ref to database manager
-     * @return Student if exists, null otherwise
-     * @throws SQLException This really shouldn't happen, what did you do? Maybe the ID was in the wrong format.
-     */
-    public static Student getStudent(String studentId, DBManager dbManager) throws SQLException {
-        ResultSet studentRow = dbManager.query("SELECT * FROM STUDENT WHERE \"StudentId\" = '" + studentId + "'");
-        if (!studentRow.next()) { return null; }
-        return new Student(studentRow, dbManager);
     }
 
     /**

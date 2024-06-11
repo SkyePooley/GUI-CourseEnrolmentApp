@@ -59,6 +59,6 @@ public class LoginView extends JDialog implements InteractivePanel, Observer
     }
     
     public void showLoginError(){
-        JOptionPane.showMessageDialog(this, "Invalid username or password", "Login Failed", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Username Does not Exist", "Login Failed", JOptionPane.ERROR_MESSAGE);
     }
 }

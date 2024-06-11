@@ -18,7 +18,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class View extends JFrame implements Observer {
-    private final double defaultScreenPortionW = 0.8;
+    private final double defaultScreenPortionW = 0.9;
     private final double defaultScreenPortionH = 0.8;
 
     // keep references to panels here
@@ -64,6 +64,8 @@ public class View extends JFrame implements Observer {
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Add Enrolment", addCoursePanel);
         tabbedPane.addTab("Remove Enrolment", removeCoursePanel);
+//        Dimension maxSize = new Dimension((int) (this.getWidth() * 0.3), this.getHeight());
+//        tabbedPane.setPreferredSize(maxSize);
         add(tabbedPane, BorderLayout.WEST);
 
         // Calendar view for visualising enrolments
@@ -91,6 +93,7 @@ public class View extends JFrame implements Observer {
         saveRevertPanel.addActionListener(listener);
         removeCoursePanel.addActionListener(listener);
         loginPopup.addActionListener(listener);
+        schedulePanel.addActionListener(listener);
     }
 
     /**
