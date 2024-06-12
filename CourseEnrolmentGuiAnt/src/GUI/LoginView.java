@@ -1,6 +1,3 @@
-/**
- * @author clayton
- */
 package GUI;
 
 import Model.DBModel;
