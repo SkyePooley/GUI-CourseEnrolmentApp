@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Tue Jun 11 17:51:23 NZST 2024:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0190-05d9-e1e9-000007600600 
-on database directory /Users/skyepooley/Desktop/GUI-CourseEnrolmentApp/CourseEnrolmentGuiAnt/EnrolmentDatabase with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7c53a9eb 
-Loaded from file:/Users/skyepooley/Desktop/GUI-CourseEnrolmentApp/CourseEnrolmentGuiAnt/lib/derby.jar
+Wed Jun 12 12:41:28 NZST 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0190-09e4-7f1e-000006d84978 
+on database directory C:\Users\Clayton\Documents\GitHub\GUI-CourseEnrolmentApp\CourseEnrolmentGuiAnt\EnrolmentDatabase with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a 
+Loaded from file:/C:/Users/Clayton/Documents/GitHub/GUI-CourseEnrolmentApp/CourseEnrolmentGuiAnt/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=11.0.21+9-LTS-193
-user.dir=/Users/skyepooley/Desktop/GUI-CourseEnrolmentApp/CourseEnrolmentGuiAnt
-os.name=Mac OS X
-os.arch=aarch64
-os.version=14.4
+java.runtime.version=11.0.22+9-LTS-219
+user.dir=C:\Users\Clayton\Documents\GitHub\GUI-CourseEnrolmentApp\CourseEnrolmentGuiAnt
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

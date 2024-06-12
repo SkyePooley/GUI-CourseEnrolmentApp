@@ -1,5 +1,5 @@
 /**
- * @author Clayton
+ * @author Clayton Roberts
  */
 package GUI;
 
@@ -14,6 +14,10 @@ import java.util.LinkedList;
 public class SelectionPanel extends JPanel implements InteractivePanel, DisplayPanel {
     private final JComboBox<String> courseComboBox;
 
+    /**
+     * The SelectionPanel class provides a user interface component for selecting a course.
+     * @author Clayton Roberts
+     */
     public SelectionPanel() {
         setLayout(new GridLayout(2, 1));
 

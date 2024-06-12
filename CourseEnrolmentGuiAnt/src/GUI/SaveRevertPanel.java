@@ -1,5 +1,5 @@
 /**
- * @author Clayton
+ * @author Clayton Roberts
  */
 package GUI;
 
@@ -15,7 +15,8 @@ public class SaveRevertPanel extends JPanel implements InteractivePanel, Display
     private final JLabel userFullName;
 
     /**
-     * 
+     * SaveRevertPanel class creates a userinterface component with options to revert changes to confirm and save them.
+     * @author Clayton Roberts
      */
     public SaveRevertPanel() {
         setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -27,6 +28,11 @@ public class SaveRevertPanel extends JPanel implements InteractivePanel, Display
         add(confirmAndSaveButton);
     }
 
+    /**
+     * Adds action listeners to revert and save buttons
+     * @param listener
+     * @author Clayton Roberts
+     */
     @Override
     public void addActionListener(ActionListener listener) {
         revertChangesButton.addActionListener(listener);

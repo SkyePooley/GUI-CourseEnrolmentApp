@@ -1,5 +1,5 @@
 /**
- * @author Clayton
+ * @author Clayton Roberts
  */
 package GUI;
 
@@ -13,7 +13,11 @@ public class StreamSelectionPanel extends JPanel implements InteractivePanel {
     private JComboBox<String> streamComboBox;
     private JButton addToScheduleButton;
     private JLabel clashWarningLabel;
-    
+
+    /**
+     * Constructor for StreamSelectionPanel. Initializes the layout and components.
+     * @author Clayton Roberts
+     */
     public StreamSelectionPanel() {
         setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -29,7 +33,11 @@ public class StreamSelectionPanel extends JPanel implements InteractivePanel {
         add(addToScheduleButton);
         add(clashWarningLabel);
     }
-
+    /**
+     * Adds action listeners to the stream combo box and the add to Schedule button.
+     * @param listener
+     * @author Clayton Roberts
+     */
     public void addActionListener(ActionListener listener) {
         streamComboBox.addActionListener(listener);
         addToScheduleButton.addActionListener(listener);
