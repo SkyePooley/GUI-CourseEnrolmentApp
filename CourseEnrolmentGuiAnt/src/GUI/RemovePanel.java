@@ -13,10 +13,11 @@ import java.util.HashMap;
 
 /**
  * The RemovePanel class provides a user interface for removing course enrolments.
+ * @author Clayton Roberts and Skye Pooley
  */
 public class RemovePanel extends JPanel implements InteractivePanel, DisplayPanel
 {
-    // combo box for selecting an elrolment to remove
+    // combo box for selecting an enrolment to remove
     private final JComboBox<String> enrolmentComboBox;
     // Button to trigger the removal of the selected enrolment
     private final JButton removeButton;

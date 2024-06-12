@@ -5,28 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="038d5a86-2683-44ec-b7c6-a838bea5de1c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c600.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Logger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/db.lck" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/db.lck" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/log.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/log.ctrl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/log1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/log1.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/log/logmirror.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/log/logmirror.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c20.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c20.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c31.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c31.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c41.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c41.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c51.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c51.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c60.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c60.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c71.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c71.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c81.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c81.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c90.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c90.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/ca1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/ca1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/cb1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/cb1.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c560.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c560.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c571.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c571.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c581.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c581.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c591.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c591.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c600.dat" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolmentDatabase/seg0/c600.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/derby.log" beforeDir="false" afterPath="$PROJECT_DIR$/derby.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/CourseEnrolmentGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/CourseEnrolmentGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CourseEnrolmentGuiAnt/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CourseEnrolmentGuiAnt/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/DisplayPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/DisplayPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/InteractivePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/InteractivePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/RemovePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/RemovePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/SaveRevertPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/SaveRevertPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/StreamSelectionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/StreamSelectionPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,6 +147,8 @@
       <workItem from="1718099254888" duration="88000" />
       <workItem from="1718152538018" duration="206000" />
       <workItem from="1718154564496" duration="3166000" />
+      <workItem from="1718158884956" duration="44000" />
+      <workItem from="1718159060392" duration="431000" />
     </task>
     <servers />
   </component>

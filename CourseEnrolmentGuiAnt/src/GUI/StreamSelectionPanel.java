@@ -10,9 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class StreamSelectionPanel extends JPanel implements InteractivePanel {
-    private JComboBox<String> streamComboBox;
-    private JButton addToScheduleButton;
-    private JLabel clashWarningLabel;
+    private final JComboBox<String> streamComboBox;
+    private final JButton addToScheduleButton;
+    private final JLabel clashWarningLabel;
 
     /**
      * Constructor for StreamSelectionPanel. Initializes the layout and components.
@@ -36,7 +36,7 @@ public class StreamSelectionPanel extends JPanel implements InteractivePanel {
     /**
      * Adds action listeners to the stream combo box and the add to Schedule button.
      * @param listener
-     * @author Clayton Roberts
+     * @author Skye Pooley
      */
     public void addActionListener(ActionListener listener) {
         streamComboBox.addActionListener(listener);
