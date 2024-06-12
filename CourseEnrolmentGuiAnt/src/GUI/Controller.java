@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 /**
  * Translation layer between the View and Model.
  * Catches ActionEvents from the View and calls corresponding method in model.
- * @author Skye Pooley & Clayton Roberts
+ * @author Skye Pooley
  */
 public class Controller implements ActionListener {
     DBModel model;

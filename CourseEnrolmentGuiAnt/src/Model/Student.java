@@ -18,6 +18,7 @@ class Student {
     protected HashSet<String> previousEnrolments;
     protected HashMap<String, Timetable> currentEnrolments;
     protected HashMap<String, Timetable> tempEnrolments;
+    private final Logger logger;
 
     /**
      * Get a student object from a student ID and reference to the database.
@@ -48,6 +49,7 @@ class Student {
         this.tempEnrolments     = new HashMap<>(8);
         this.previousEnrolments = new HashSet<>(20);
         this.currentEnrolments  = new HashMap<>(8);
+        logger = new Logger(dbManager);
 
         // get previous enrolments as course code strings
         ResultSet previousEnrolmentRows = dbManager.query("SELECT * FROM PAST_ENROLMENT WHERE \"StudentId\" = '" + studentId + "'");
@@ -105,12 +107,20 @@ class Student {
         database.updateBatch(commands);
     }
 
+    public void addTempEnrolment(String courseCode, Timetable timetable) {
+        this.tempEnrolments.put(courseCode, timetable);
+        logger.logChange(studentId, "Added " + courseCode + " - " + timetable.tableIndex);
+    }
+
     /**
      * Rollback all changes made by the user in this session.
      * @param dbManager Database connection to reload confirmed enrolments.
      * @throws SQLException Error while reading in enrolments.
      */
     public void rollbackChanges(DBManager dbManager) throws SQLException {
+        for (String code : tempEnrolments.keySet()) {
+            logger.logChange(studentId, "Removed " + code);
+        }
         this.tempEnrolments.clear();
         this.currentEnrolments.clear();
         this.loadCurrentEnrolments(dbManager);
@@ -121,6 +131,7 @@ class Student {
      * @param courseCode Course code matching enrolment.
      */
     public void removeEnrolment(String courseCode) {
+        logger.logChange(studentId, "Removed " + courseCode);
         if (tempEnrolments.remove(courseCode) != null) { return; }
         if (currentEnrolments.remove(courseCode) != null) { return; }
         System.out.println("Attempted to remove an enrolment which does not exist.");
@@ -170,10 +181,6 @@ class Student {
                     return true;
         }
         return false;
-    }
-
-    public void addTempEnrolment(String courseCode, Timetable timetable) {
-        this.tempEnrolments.put(courseCode, timetable);
     }
 
     /**

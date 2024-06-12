@@ -11,7 +11,7 @@ public class CourseEnrolmentGUI {
 
     /**
      * Main to make our GUI run and execute
-     * @author Clayton Roberts
+     * @author Clayton Roberts, Skye Pooley
      */
     public static void main(String[] args) {
         CourseEnrolmentGUI gui = new CourseEnrolmentGUI();
